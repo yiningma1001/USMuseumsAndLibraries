@@ -2,5 +2,15 @@
 
 ## Research topic
 
+Our research topic is about the museums and public libraries across the US. 
+
+For the museums, there are different kinds of museums including art museums, history museums and so on. We are interested in the number of different kinds of museum countrywide and statewide. Also, different states have different number of museums which partly reflect the culture and development of individual states. Some of the museum are free to visit while some need to buy ticket, thus we would like to further analyze the income of individual museums.
+
+For the libraries, some libraries provide readers more than printed materials, such as audio and e-books and analyzing the number of books and other resources of a library can reflect the scale of the library. As many of libraries were built especially for the local resident and we would like to analyze relationship between the number of people visit the library or register in the library and the population of that area. Some of the libraries have librarian and we are also interested in their salary and also other aspect related to the economic condition of the library including their revenue. Also, to analyze the influence of modern technology, we would like to analyze the trend of the number of visitors of libraries.
+
+Moreover, as both the construction of museum and library are part of the culture development of a region, we will put data of library and museum together and explore whether their are some similarity between public library and museum in the same region which can reflect how much importance local government put on the culture development.
+
+In a word, our research focus on the number of museums and libraries across the nation as well as their scale and operation condition. By analyzing the distribution of the museums and libraries in different region, we try to analyze the local culture development.
+
 ## Data availability
 
