@@ -1,6 +1,6 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAMES HERE"
+title: "US Museums and Libraries Analysis"
+author: "Group 5: Yuanyi Hu, Yi Zhuang, Yining Ma"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
