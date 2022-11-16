@@ -6,8 +6,6 @@ site: bookdown::bookdown_site
 ---
 
 # Introduction
-A quick try to change something.
-
 In old days, people would like to visit the museums or the public libraries in their spare time for relaxation or looking for new information. Thus, there are libraries and museums across the nation aimed to serving people live in the region. Additionally, there are famous paintings, sculptures and other art works created by talented artist from all over the world preserving in some of museums in the country which becomes one of the must-visit scenic spots for travelers as well as the locals. As a result, libraries and museums are important components in the culture of a country and people's life which makes it necessary and interesting to look into the data related to them. 
 
 There are different kinds of museums such as museum of arts or museum for children and some museums are free to visit while some charging a ticket. For the public libraries, there are libraries with different scale and some provide more than just printed books. We are interested in the distribution of museums and libraries across the country including what kinds of museum are there and how many of museums or libraries across the country or in different states. Also, as both of them are part of the nation's culture development, we are also curious about whether their distribution across the country has some similarity or clustering pattern.  
