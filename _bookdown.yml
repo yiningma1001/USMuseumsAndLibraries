@@ -2,7 +2,7 @@ book_filename: "finalproj"
 output_dir: docs
 delete_merged_file: true
 edit: https://github.com/yiningma1001/USMuseumsAndLibraries/edit/main/%s
-view: https://github.com/yiningma1001/SMuseumsAndLibraries/blob/main/%s
+view: https://github.com/yiningma1001/USMuseumsAndLibraries/blob/main/%s
 language:
   ui:
     chapter_name: "Chapter "
