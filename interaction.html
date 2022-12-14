@@ -1,13 +1,21 @@
-# Interactive component
-<script src="https://d3js.org/d3.v7.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>State ranks of owing libraries or museums</title>
+    <script src="https://d3js.org/d3.v7.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
 
-<h1>Check state ranks of owing libraries or museums </h1>
-
-<button type="button" id="library" class="btn btn-default" value="library">Library</button>
-<button type="button" id="museum" class="btn btn-default" value="museum">Museum</button>
-
-<div id="plot"></div>
-<script>
+  <body>
+    <div id="container" class="container">
+        <h1>Check state ranks of owing libraries or museums </h1>
+        <div id="main" role="main">
+            <div class="btn-group" role="group">
+                <button type="button" id="library" class="btn btn-default" value="library">Library</button>
+                <button type="button" id="museum" class="btn btn-default" value="museum">Museum</button>
+            </div>
+  <script>
 
 // Create svg and initial bars
 
@@ -49,7 +57,7 @@
   
   // add svg
   
-    const svg = d3.select("div#plot")
+    const svg = d3.select("body")
       .append("svg")
         .attr("width", w)
         .attr("height", h);
@@ -135,7 +143,9 @@
       d3.select(event.currentTarget).attr("fill","pink");
         });
 }
-d3.select("#library")
+ </script>
+    <script>
+    d3.select("#library")
         .on("click", function () {
          d3.selectAll("svg").remove()
          drawbars(bardata,bardata2)
@@ -146,4 +156,8 @@ d3.select("#library")
         d3.select("svg").remove()
         drawbars(mubardata,mubardata2)
     });
- </script>
+
+    </script>
+  </body>
+
+</html>

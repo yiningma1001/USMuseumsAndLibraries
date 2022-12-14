@@ -375,6 +375,9 @@ On the contrary, we can see a quick increase in the collection of books in most 
 ### Museum map
 
 ```{r}
+df_museum <- museum_c %>% group_by(ADSTATE)%>%
+  summarize(numbers=n()) %>% 
+  as.data.frame()
 df_museum_c<-left_join(df_museum, statecode, by=c("ADSTATE"="code"))
 df_museum_c<-transmute(df_museum_c,region=tolower(`state`),value=numbers)
 
