@@ -153,16 +153,16 @@
 #### Library Data Set
 1. Library data of 2020
 In this project, we first analyze the data of Library in US in 2020. According to the document of the data set, all the missing data is filled with ‘-1’. Thus, we will visualize the distribution of ‘-1’ in this data set.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>As we can see from the graph, the only row has missing data is the state with code ‘VI’ which is Virgin Islands. All other data is completed. As this state is an outlying area of the United States and missing data are primarily some statistic data about the revenue and resource data of the library, we believe it is reasonable to keep the data as ‘-1’ in these rows which have little effect on our visualization.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>This graph shows the pattern further which is most rows (data of different state) is complete and provide us a relatively good data quality to analyze and visualize the libraries in US.</p>
 <div id="time-series-missing-data-analysis" class="section level4 hasAnchor" number="3.3.1.1">
 <h4><span class="header-section-number">3.3.1.1</span> Time series missing data analysis<a href="data.html#time-series-missing-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Moreover, to discuss the changing pattern of libraries in US, we collect library data in different years. Although we can easily read in all the raw data, band them together and select the variables we are interested in, we believe that to store such a large set of data makes the requirement of space of this project too big and the transforming progress takes a lot of time. As a result, we choose the variable in each years’ data and store them in a csv file. As the data update once a year, it will not take too much time to add new data to this file. As for the data format, we keep it same with the original data and all the missing data is filled with ‘-1’.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>As we can see from the graph, there are three states having missing data through the years which are GU(Guam), MP(Northern Mariana Islands) and VI(Virgin Islands). All of these states are outlying area of the United States. Thus, we keep these data with its original form.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>As we can see in this chart, among all the rows having missing data, some of them missing quite a lot of data while others only miss one or two data. As we result, we would like to further see the missing data. We select all the rows of the three states and data is as below:</p>
 <pre><code>##    STABR YEAR POPU_LSA CENTLIB BRANLIB BKMOB  BKVOL EBOOK VISITS
 ## 1     GU 2020   168678       1       5     0 286930     0  35115
