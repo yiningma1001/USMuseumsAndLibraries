@@ -3,6 +3,13 @@
 ## Sources
 
 ### Library Data Source
+The Museum data is from the official website of the Institute of Museum and Library Services(IMLS), and we use the latest version that collected in 2018. There are three csv files that contain different type of museums. The second file just contains GMU museums, the third file just contains HSC museums.
+
+The three files contain 7431, 7961, 14786 museums, and each file has 58 variables, including some basic information, like the id, location, contact, ruledate information, and the income and revenue information.
+
+And we choose to mainly analyse the discipline, income and ruledate 
+
+### Library Data Source
 The library data set is also from <https://www.imls.gov/> which is the website of the Institute of Museum and Library Service. This institute provide several data set regarding museum and library across the nation. We use the data set of The Public Libraries Survey (PLS) which supplied annually by public libraries across the country on when, where, and how library services are changing to meet the needs of the public.
 
 The data was collected by the institute. The survey is administered by Data Coordinators and the requested data was collected  from local public libraries. There is a web-based reporting system State Data Coordinators used report data to the institute.
@@ -15,7 +22,7 @@ The data set provides statistics on the status of public libraries in the United
 
 ## Cleaning / transformation
 
-### Library Data Cleaning
+### Museum Data Cleaning
 ```{r}
 library("readxl")
 library("openintro")
@@ -24,9 +31,30 @@ library("ggplot2")
 library("tidyverse")
 library("GGally")
 library("choroplethr")
+library("choroplethrMaps")
 library("ggthemes")
 library("redav")
+```
 
+```{r}
+## Read data, merge three files, and select useful variables.
+museum1<-read.csv('./data/museum/MuseumFile2018_File1_Nulls.csv')
+museum2<-read.csv('./data/museum/MuseumFile2018_File2_Nulls.csv')
+museum3<-read.csv('./data/museum/MuseumFile2018_File3_Nulls.csv')
+
+museum1<-museum1 %>% dplyr::select(MID,DISCIPL,ADSTATE, INCOMECD15,RULEDATE15)
+museum2<-museum2 %>% dplyr::select(MID,DISCIPLINE, ADSTATE,INCOMECD15,RULEDATE15)
+museum3<-museum3 %>% dplyr::select(MID,DISCIPLINE,ADSTATE, INCOMECD15,RULEDATE15)
+
+museum1<-transform(museum1, MID = as.numeric(MID))
+museum1<-rename(museum1, DISCIPLINE = DISCIPL)
+
+df_list <- list(museum1, museum2, museum3)
+museum<-Reduce(function(x, y) merge(x, y, all=TRUE), df_list, accumulate=FALSE)
+```
+
+### Library Data Cleaning
+```{r}
 listatedata<-read.csv("./data/PLS_FY20_State_pud20i.csv")
 #listatedata
 listatedatamis<-read.csv("./data/PLS_FY20_State_pud20imi2.csv")
@@ -46,6 +74,17 @@ statecode<-read.csv("./data/statecode.csv")
 
 
 ## Missing value analysis
+### Museum Data
+if MID is missing, we think it is not a valid museum record, and delete. 
+There are 8677(28.8%) empty value in incomecd, and 8682(28.8%) emtpy value in rule data
+Most missing cases are missing 1 variable, and some are missing two, which mean missing ruledata and incomecd are not strongly correlated.
+```{r}
+colSums(is.na(museum)) 
+plot_missing(museum, percent = TRUE)
+museum_c<-museum %>% drop_na(MID)
+```
+
+
 
 ### Library Data
 We first visualize the missing data in our data set and discuss the pattern it has. This is an important step for us to under stand our data.

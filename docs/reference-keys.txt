@@ -5,12 +5,19 @@ data-availability
 data
 sources
 library-data-source
+library-data-source-1
 cleaning-transformation
+museum-data-cleaning
 library-data-cleaning
 missing-value-analysis
+museum-data
 library-data
 time-series-missing-data-analysis
 results
+museum-in-us
+the-distribution-of-museums-of-different-discipline
+relationship-between-income-and-discipline
+new-museums-trend
 library-in-us
 analysis-of-library-2020
 population-and-visitors
@@ -26,6 +33,7 @@ number-of-people-visit-library
 printed-material-change-during-past-15-years
 number-of-ebook-change-during-past-15-years
 museum-and-library-in-us
+museum-map
 library-map
 interactive-component
 conclusion
