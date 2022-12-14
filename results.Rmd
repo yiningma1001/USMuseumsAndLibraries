@@ -1,1 +1,327 @@
 # Results
+
+
+## Library in US
+### Analysis of Library 2020
+#### Population and visitors
+```{r}
+popstate<-listatedata%>%select(STABR,POPU_LSA,VISITS,REGBOR)
+popstate<-set_names(popstate,c("STABR","Population","Visitor","RegistedUser"))
+#popstate
+```
+
+```{r fig.height=6}
+
+popstate %>%
+  pivot_longer(cols=!STABR,names_to = "type",values_to = "value") %>%
+  ggplot(aes(x=value, y=fct_reorder2(STABR,type=='POPU_LSA',value,.desc=FALSE), color = type)) +
+  geom_point() +
+  ggtitle("Population, Number of People Visit Library and Number of Registers in Different States") +
+  ylab("") +
+  theme_linedraw()
+```
+
+We first analyze the population, number of people visit local library and number of register member of library in each state. The cleveland dot plot is ordered by the population of each state. As we can see from the graph, there is a overall trend of the state has large population tend to have more visitor and register to libraries in the state. In another word, there is a positive correlation between the population and the number of visitors. However, this is not graranteed as there are some state with large population having relatively small number of visitors like Texas and Florida. 
+
+```{r}
+order <- popstate %>% 
+  arrange(Population) %>% 
+  mutate(STABR = factor(STABR))
+```
+
+
+#### Number of library
+```{r}
+numliPostate<-listatedata%>%select(STABR,CENTLIB,BRANLIB,BKMOB)
+numliPostate<-set_names(numliPostate,c("STABR","CenterLibrary","BranchLibrary","BookMobile"))
+#numliPostate
+
+```
+
+```{r}
+numliPostate_tidy<-numliPostate%>%
+   pivot_longer(cols = !STABR, names_to = "librarytype", values_to = "numberoflibraires")
+#numliPostate_tidy
+```
+
+```{r fig.height=8}
+gnumofLi<-ggplot(data = numliPostate_tidy, aes(x = factor(STABR, levels = order$STABR), y = numberoflibraires, fill = librarytype)) +
+  geom_bar(stat="identity") +
+  xlab("State") +
+  ylab("Number of Library") +
+  guides(fill=guide_legend(title="Library Type")) +
+  ggtitle("Number of Libraries in Different States Ordered by State's Poluation") +
+  theme(plot.title = element_text(hjust = 0.5,size=15)) +
+  scale_y_continuous() +
+  coord_flip()
+gnumofLi
+```
+
+Then, we would like to analyze the number of library in each state. There are basically three kinds of libraries: center library, branch library and book mobile. We use a stacked bar chart to show the number of library in each state and the bars are ordered by the population of each state. As we can see, there is also a positive correlation between the population of each state and the number of library. However, this is not graranteed as there are some state with large population having relatively small number of library like Florida and Arizona. 
+
+
+```{r}
+order2 <- numliPostate %>% 
+  mutate(numLi=CenterLibrary+BranchLibrary+BookMobile)%>%
+  arrange(numLi) %>% 
+  mutate(STABR = factor(STABR))
+```
+```{r fig.height=8}
+gnumofLi<-ggplot(data = numliPostate_tidy, aes(x = factor(STABR, levels = order2$STABR), y = numberoflibraires, fill = librarytype)) +
+  geom_bar(stat="identity") +
+  xlab("State") +
+  ylab("Number of Library") +
+  guides(fill=guide_legend(title="Library Type")) +
+  ggtitle("Number of Libraries in Different States") +
+  theme(plot.title = element_text(hjust = 0.5,size=15)) +
+  scale_y_continuous() +
+  coord_flip()
+gnumofLi
+```
+
+In the following part, we are interested in other aspect of different state's libraries which is more closely related to the number of library instead of the population. To better analyze the patterns of these variables, we make a stacked bar chart of the number of library in each state ordered by the total number of library. As we can see from the graph above, the proportion of different kind of libraries are different among different states. For example, California has a large proportion of branch libraries while New York has more proportion of main libraries. This shows that the structure of library systems of different states are different.
+
+
+#### Collections of Libraries
+```{r}
+numCostate<-listatedata%>%select(STABR,BKVOL,EBOOK,AUDIO_PH,AUDIO_DL,VIDEO_PH,VIDEO_DL,EC_LO_OT,EC_ST)
+#numCostate
+numCostate<-transmute(numCostate,STABR=STABR,PrintMaterial=BKVOL,eBook=EBOOK,Audio_Physical=AUDIO_PH,Audio_Digit=AUDIO_DL,Viedo_Physical=VIDEO_PH,Viedo_Digit=VIDEO_DL,OtherElectronic=EC_LO_OT+EC_ST)
+#numCostate
+```
+
+```{r}
+numCostate_tidy<-numCostate%>%
+   pivot_longer(cols = !STABR, names_to = "resourcetype", values_to = "numberofresource")
+#numCostate_tidy
+```
+
+```{r fig.height=8}
+ggplot(data = numCostate_tidy, aes(x = factor(STABR, levels = order2$STABR), y = numberofresource, fill = resourcetype)) +
+  geom_bar(stat="identity") +
+  xlab("State") +
+  ylab("Number of Resource") +
+  guides(fill=guide_legend(title="Resource Type")) +
+  ggtitle("Resource in Different States' Library Ordered by Number of Library") +
+  theme(plot.title = element_text(hjust = 0.5,size=15)) +
+  scale_y_continuous() +
+  coord_flip()
+```
+
+There are several kinds of resource in each library: printed material, audio resource in physical format or digital format, video resource in physical format or digital format, ebook, state digital resource and other electronic resource. As the last two kinds are relatively small, we combine them together and set as a new group 'other digital resource'. 
+
+The stacked bar chart is sorted by the number of library in each state. As we can see, there is a positive correlation between the number of library and the total resource owned by local library. However, there are also many outliers like Ohio and Kansas which own much more resource than expected. Further more, we can see from the graph that different state's library's resource pattern are different. Some of the state has more proportion of electronic resource while some of the libraries have more proportion of printed material.
+
+
+#### Events Hold by Libraries
+```{r}
+numEvstate<-listatedata%>%select(STABR,TOTPRO,KIDPRO,YAPRO)
+numEvstate<-transmute(numEvstate,STABR=STABR,Childrenprogram=KIDPRO,YoungAdultProgram=YAPRO,OtherProgram=TOTPRO-KIDPRO-YAPRO)
+#numEvstate
+```
+
+```{r}
+numEvstate_tidy<-numEvstate%>%
+   pivot_longer(cols = !STABR, names_to = "eventtype", values_to = "numberofevent")
+#numEvstate_tidy
+```
+
+
+```{r fig.height=8}
+ggplot(data = numEvstate_tidy, aes(x = factor(STABR, levels = order2$STABR), y = numberofevent, fill = eventtype)) +
+  geom_bar(stat="identity") +
+  xlab("State") +
+  ylab("Number of Event") +
+  guides(fill=guide_legend(title="Event Type")) +
+  ggtitle("Events in Different States' library Ordered by Number of Library") +
+  theme(plot.title = element_text(hjust = 0.5,size=15)) +
+  scale_y_continuous() +
+  coord_flip()
+```
+
+Most of the libraries hold reading event for readers. There are events for children, young adult and others. As we can see from the graph above, state with more number of library tend to have more reading event over state. Among all the events, most states' library tend to have more program for children except New York and Florida.
+
+#### Revenue
+```{r}
+revstate<-listatedata%>%select(STABR,LCAP_REV,SCAP_REV,FCAP_REV,OCAP_REV)
+revstate<-set_names(revstate,c("STABR","LocalGov","StateGov","FederalGov","OtherCapital"))
+
+#revstate
+```
+
+```{r}
+revstate_tidy<-revstate%>%
+   pivot_longer(cols = !STABR, names_to = "revenuetype", values_to = "amountofrevenue")
+#revstate_tidy
+```
+
+```{r fig.height=8}
+ggplot(data = revstate_tidy, aes(x = factor(STABR, levels = order2$STABR), y = amountofrevenue, fill = revenuetype)) +
+  geom_bar(stat="identity") +
+  xlab("State") +
+  ylab("Amount of Revenue") +
+  guides(fill=guide_legend(title="Revenue Type")) +
+  ggtitle("Amount of Revenue Received by Different States' Librariey Ordered by Number of Library") +
+  theme(plot.title = element_text(hjust = 0.5,size=15)) +
+  scale_y_continuous() +
+  coord_flip()
+```
+
+As we all know that most of the libraries are free for residents to visit and a large proportion of money are from revenue. There are four kinds of revenue that a library can have, which are revenue from federal government, state government, local government and others. We ordered the stacked bar chart in the order of number of libraries in a state. As we can see from the graph, the relationship between the number of library and total amount of revenue is relatively weak comparing with other characters we analyzed before. This shows that some of the states' library receive more revenue than others. Most of states' library receive more revenue from their local government while there are several state receive more revenue from other way. We can also see that New York, Massachusetts and Hawaii's libraries receive relatively large amount of revenue from the state government which some how reflect the importance put on libraries or other entertainment and culture by the state.
+
+#### Overall Analysis
+```{r}
+ovrLiState<-transmute(listatedata,STABR=STABR,population=POPU_LSA,numoflibraries=CENTLIB+BRANLIB+BKMOB,numofvisitors=VISITS,numofmembers=REGBOR,bookcoll=BKVOL,ebookcoll=EBOOK,eleccoll=ELECCOLL,programs=TOTPRO,revenue=CAP_REV)
+#bookdown::render_book("index.Rmd")ovrLiState
+```
+
+```{r}
+ggparcoord(ovrLiState, columns=2:10, 
+           title = "Parallel Coordinate Plot for Libraries in US")
+```
+
+We put all the variables we discussed together including the population, number of visitors, number of register, printed material resource, ebook resource, electronic resource, programs and revenue. We can see from the parallel coordinate graph that the relationship between each variable are basically positive correlated for most of the states and each variable has outliers. 
+
+California is outlier for all the variables regarding the number of people including the number of visitor, member of library. New York has biggest volume of books while Kansas and Ohio has really high number of ebook and Pennsylvania has highest number of other electronic resource. California and New York receive highest amount of revenue. As we can see from above, some of the state dominate more than one variable like California and New York while more than half of states have relative low value in all of the variables which shows a inequality development of library in different state.
+
+As we can see from the spatial graph, the state with higher number of library are clustered on the east side of the country especially the north east region while the state in the west east have relatively low number of library.
+
+### Time Series Analysis
+We also interested in the change of data during past 15 years as the world changed quickly with the development of internet and all kinds of entertainment in people's life. Thus, we make a series of graph to show the change in number of library, number of people visit library annually, and the number of books and ebooks in library. As our data is annual data, we didn't transform it into 'date' data type but keep it as integer.
+
+#### Population change in past 15 years
+```{r}
+df_library <- listatetime %>%
+  select(STABR,YEAR,POPU_LSA) 
+
+top5<-df_library%>%
+  filter(YEAR==2020)%>%
+  arrange(.,-POPU_LSA)
+#top5
+
+df_library<-df_library%>%
+  mutate(type=ifelse(STABR %in% c("CA","TX","FL","NY","PA"),STABR,"other"))
+
+ggplot(df_library, aes(YEAR, POPU_LSA,color=type)) +
+  geom_line(aes(group = `STABR`)) +
+  ggtitle("State Population through 2005-2020") +  labs (x = "", y = "population") +
+  scale_color_manual(values=c("CA"="#e6ab02","TX"="#a6761d","NY"="#e7298a","other"="grey"))+
+  theme_grey(16) +
+  theme(legend.title = element_blank())
+```
+
+First, we show that the population of each state has a slow but stable increasing trend during the past 15 years. Although the increment is not so big except several big state. The top five population dense states are California, Texas, Florida, New York and Pennsylvania. We didn't show Florida and Pennsylvania in the graph with particular corresponding color as these two states don't rank top in the other statistic value regarding library.
+
+#### Number of Library change in past 15 years
+
+```{r}
+df_library <- listatetime %>%
+  select(STABR,YEAR,CENTLIB,BRANLIB,BKMOB)%>%
+  mutate(numberoflib=CENTLIB+BRANLIB+BKMOB)
+
+top5<-df_library%>%
+  filter(YEAR==2020)%>%
+  arrange(.,-numberoflib)
+#top5
+
+df_library<-df_library%>%
+  mutate(type=ifelse(STABR %in% c("CA","NY","TX","IL","OH"),STABR,"other"))
+
+ggplot(df_library, aes(YEAR, numberoflib,color=type)) +
+  geom_line(aes(group = `STABR`)) +
+  ggtitle("Number of Library through 2005-2020") +  
+  labs (x = "", y = "number of library") +
+  scale_color_manual(values=c("CA"="#e6ab02","NY"="#e7298a","TX"="#a6761d","IL"="#66a61e","OH"="#1b9e77","other"="grey"))+
+  theme_grey(16) +
+  theme(legend.title = element_blank())
+```
+
+Then, we compare the number of library in each state and we can see that most of states' number of library didn't change during the past 15 years.
+
+#### Number of people visit library
+```{r}
+
+df_library <- listatetime %>%
+  select(STABR,YEAR,VISITS) 
+
+top5<-df_library%>%
+  filter(YEAR==2020)%>%
+  arrange(.,-VISITS)
+
+#top5
+
+df_library<-df_library%>%
+  mutate(type=ifelse(STABR %in% c("CA","IL","OH","NY","TX"),STABR,"other"))
+
+ggplot(df_library, aes(YEAR, VISITS,color=type)) +
+  geom_line(aes(group = `STABR`)) +
+  ggtitle("Visit of Library through 2005-2020") +  
+  labs (x = "", y = "number of visitor") +
+  scale_color_manual(values=c("CA"="#e6ab02","IL"="#66a61e" ,"OH"="#1b9e77","NY"="#e7298a","TX"="#a6761d","other"="grey"))+
+  theme_grey(16) +
+  theme(legend.title = element_blank())
+
+```
+After we known that the population didn't decrease but indeed increased in most of states and the number of library didn't change, we can see that the proportion of population decreased during the past 15 years. In other word, less people visit library during the past years which may partly due to people can search information more and more conveniently on cellphone or computer and have more ways to relax during their spare time. It is also very likely that people live better life now and they can afford buying their own copy of book instead of borrow one. However, comparing with the decrease in 2020, the decrease trend is much more subtle which means that there are still lots of people go to library before the pandemic. The covid-19 has more impact on whether people would like to or whether they can visit a library.
+
+#### Printed material change during past 15 years
+```{r}
+df_library <- listatetime %>%
+  select(STABR,YEAR,BKVOL) 
+top5<-df_library%>%
+  filter(YEAR==2020)%>%
+  arrange(.,-BKVOL)
+#top5
+
+df_library<-df_library%>%
+  mutate(type=ifelse(STABR %in% c("NY","CA","IL","OH","TX"),STABR,"other"))
+
+ggplot(df_library, aes(YEAR, BKVOL,color=type)) +
+  geom_line(aes(group = `STABR`)) +
+  ggtitle("Printed Material through 2005-2020") +
+  labs (x = "", y = "number of printed material") +
+  scale_color_manual(values=c("NY"="#e7298a","CA"="#e6ab02","IL"="#66a61e","OH"="#1b9e77","TX"="#a6761d","other"="grey"))+
+  theme_grey(16) +
+  theme(legend.title = element_blank())
+```
+
+
+Then, we can see that the collection of books in some state's library has a decreasing trend during the past 15 years which is especially clear in some of the state has large volume of books in the past. This is quite surprising outcome as it seems unlikely that people in the library throw away books.
+
+#### Number of ebook change during past 15 years
+
+```{r}
+df_library <- listatetime %>%
+  select(STABR,YEAR,EBOOK)
+  
+top5<-df_library%>%
+  filter(YEAR==2020)%>%
+  arrange(.,-EBOOK)
+
+df_library<-df_library%>%
+  mutate(type=ifelse(STABR %in% c("OH","KS","WI","NY","IL"),STABR,"other"))
+
+ggplot(df_library, aes(YEAR, EBOOK,color=`type`)) +
+  geom_line(aes(group = `STABR`)) +
+  ggtitle("Ebook Resource through 2005-2020") +  
+  labs (x = "", y = "number of ebook") +
+  scale_color_manual(values=c( "OH"="#1b9e77", "KS"="#d95f02" ,"WI"="#7570b3" ,"NY"="#e7298a","IL"="#66a61e" ,"other"="grey"))+
+  theme_grey(16) +
+  theme(legend.title = element_blank())
+```
+
+On the contrary, we can see a quick increase in the collection of books in most of state's library during the past 10 years. Ebook came out around 2010 and became more and more popular during the past years. There are several state ended with a really large number of collection of ebook which shows they put a lot of importance on this kind of resource provided to people. We can also specify that the state with relatively large collection of ebook are also those with large collection of printed materials which show that a state kind of support the development of library. 
+
+## Museum and Library in US
+
+### Library map
+```{r}
+numli<-listatedata%>%select(STABR,CENTLIB,BRANLIB,BKMOB)
+data2<-inner_join(numli,statecode,by=c("STABR"="code"))
+df<-transmute(data2,region = tolower(`state`),value=CENTLIB+BRANLIB+BKMOB)
+#df
+state_choropleth(df,
+                 title = "State Library Number, 2020",
+                 legend = "Number of Library")
+```
+As we can see from the spatial graph, the state with higher number of library are clustered on the east side of the country especially the north east region while the state in the west east have relatively low number of library.
