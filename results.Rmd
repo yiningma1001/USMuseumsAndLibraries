@@ -1,5 +1,64 @@
 # Results
+## Museum in US
+### The distribution of museums of different discipline
 
+```{r}
+df_museum_dis <- museum_c %>% group_by(DISCIPLINE,ADSTATE)%>%
+  summarize(numbers=n()) 
+
+p1<-ggplot(data = df_museum_dis, aes(x = reorder(ADSTATE,numbers,sum), y=numbers, fill=DISCIPLINE)) + 
+  geom_bar(stat="identity")+
+  coord_flip()
+p1
+```
+
+We can find that HSC(Historical Societies / Historic Preservation) and GMU(Uncategorized or General Museums) take great share in each state's museums, especially HSC. And the proportions of different disciplines in different states remains similar, which means there is no tendency of a state to own one kind of museum more.
+
+### Relationship between income and Discipline
+
+```{r}
+df_museum_inc <- museum_c %>% group_by(DISCIPLINE, INCOMECD15)%>%
+  summarize(numbers=n()) 
+df_museum_inc<-transform(df_museum_inc, INCOMECD15 = as.character(INCOMECD15))
+df_museum_inc$INCOMECD15<- replace_na(df_museum_inc$INCOMECD15,"unknown")
+
+proportion<-df_museum_inc %>%
+  group_by(DISCIPLINE)%>%
+  mutate(proportion = 100*numbers/sum(numbers))%>%
+  ungroup
+
+## since the number differs a lot between different disciplines and we are curious about the 
+## income distribution within each discipline, we compare the proportion of different income groups
+ggplot(proportion, aes(x = DISCIPLINE, y = INCOMECD15, fill=proportion)) +
+  geom_tile(aes(fill = proportion), color = "white") +
+  coord_fixed()+
+  scale_fill_gradient2(low = "black", mid = "white",
+                       high ="#3182bd", midpoint = .2) 
+```
+
+It shows that there are a lot of museums did not provide their income status. In those museums that provided incomes, except ART and CMU, museums of other disciplines that did not have incomes takes biggest share, especially HSC, since most of this kind of museum don't need tickets. 
+
+And also incomes between 25,000 and 4,999,999 take some shares. But since Art Museums are often charge highly, there are great proportion of Art museums earn income over 50,000,000 in 2015.
+
+### New museums trend
+
+```{r}
+df_year<-museum_c %>%
+  mutate(rule_year=as.numeric(substr(RULEDATE15,1,4)))%>%
+  filter(rule_year>0) %>%
+  #filter(DISCIPLINE!="HSC") %>%
+  mutate(decate=floor(rule_year/10)*10)%>%
+  group_by(decate, DISCIPLINE)%>%
+  summarise(number=n())
+
+ggplot(df_year, aes(x=decate, y=number, group= DISCIPLINE, color= DISCIPLINE)) +
+  geom_line()
+```
+
+The numbers of most kinds of museums increase slowly since 1920s to 2000s. Since the data is collected in 2018, the new museum numbers cannot present the total 2010s. However, there is an obvious increase of HSC number from 1950s to 2000s, which indicates that the government established lots of Historical Societies / Historic Preservation after 1950s. 
+
+Besides that, the numbers of GMU and HST also increased a lot. The rapid growth of history related museum reflects that we care about our history more and more in recent days.
+Also, the number of art museum in 1940s has an obvious increase, which means people at that time the fasion of enjoying art was prevailing.
 
 ## Library in US
 ### Analysis of Library 2020
@@ -313,9 +372,24 @@ ggplot(df_library, aes(YEAR, EBOOK,color=`type`)) +
 On the contrary, we can see a quick increase in the collection of books in most of state's library during the past 10 years. Ebook came out around 2010 and became more and more popular during the past years. There are several state ended with a really large number of collection of ebook which shows they put a lot of importance on this kind of resource provided to people. We can also specify that the state with relatively large collection of ebook are also those with large collection of printed materials which show that a state kind of support the development of library. 
 
 ## Museum and Library in US
+### Museum map
+
+```{r}
+df_museum_c<-left_join(df_museum, statecode, by=c("ADSTATE"="code"))
+df_museum_c<-transmute(df_museum_c,region=tolower(`state`),value=numbers)
+
+state_choropleth(df_museum_c,
+                 title = "State Museum Number, 2020",
+                 legend = "Number of Museum")
+#df_musesum_c$state <- tolower(df_musesum_c$state)
+#us_states_museum <- left_join(us_states, df_musesum_c,by=c("region"="state"))
+```
+
+It shows that California, Texas and New York states have obviously more museums than other states, the numbers are over 1600. There are more museums in the east than west, and more in the outside states than states in the middle. Especially, in Delaware, Alaska, Utah, and Nevada have under 160 museums.
 
 ### Library map
 ```{r}
+
 numli<-listatedata%>%select(STABR,CENTLIB,BRANLIB,BKMOB)
 data2<-inner_join(numli,statecode,by=c("STABR"="code"))
 df<-transmute(data2,region = tolower(`state`),value=CENTLIB+BRANLIB+BKMOB)
