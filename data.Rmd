@@ -2,7 +2,114 @@
 
 ## Sources
 
+### Library Data Source
+The library data set is also from <https://www.imls.gov/> which is the website of the Institute of Museum and Library Service. This institute provide several data set regarding museum and library across the nation. We use the data set of The Public Libraries Survey (PLS) which supplied annually by public libraries across the country on when, where, and how library services are changing to meet the needs of the public.
+
+The data was collected by the institute. The survey is administered by Data Coordinators and the requested data was collected  from local public libraries. There is a web-based reporting system State Data Coordinators used report data to the institute.
+
+The survey was conducted annually since 1988 and the website provides data files since 1992. During past years, the content on the survey changed 3 times and the format of the data sets are slightly differences.
+
+As for the data file, the data files are available on the web site and is a public-used data set which means some of the data was removed aimed to protect the confidentiality of individually identifiable survey respondents. Our project use this public-used data set which was encoded and pre-processed and provides a documentation file to help the user correctly understand the data set and gives detailed information about the data set.
+
+The data set provides statistics on the status of public libraries in the United States collected from approximately 9,000 public libraries with approximately 17,000 individual public library outlets in the 50 states, the District of Columbia, and outlying territories. The data set contains information about library visits, circulation, size of collections, public service hours, staffing, electronic resources, operating revenues and expenditures and number of service outlets. We basically use the state wide data which contains 55 rows and more than 100 variables.
+
 ## Cleaning / transformation
+
+### Library Data Cleaning
+```{r}
+library("readxl")
+library("openintro")
+library("dplyr")
+library("ggplot2")
+library("tidyverse")
+library("GGally")
+library("choroplethr")
+library("ggthemes")
+library("redav")
+
+listatedata<-read.csv("./data/PLS_FY20_State_pud20i.csv")
+#listatedata
+listatedatamis<-read.csv("./data/PLS_FY20_State_pud20imi2.csv")
+#listatedatamis
+
+#time series
+listatetime<-read.csv("./data/TimeSeries.csv")
+#listatetime
+
+listatetimemi<-read.csv("./data/TimeSeries_mi.csv")
+#listatetimemi
+
+#state code
+statecode<-read.csv("./data/statecode.csv")
+#statecode
+```
+
 
 ## Missing value analysis
 
+### Library Data
+We first visualize the missing data in our data set and discuss the pattern it has. This is an important step for us to under stand our data.
+#### Library Data Set
+1. Library data of 2020
+In this project, we first analyze the data of Library in US in 2020. According to the document of the data set, all the missing data is filled with '-1'. Thus, we will visualize the distribution of '-1' in this data set.
+
+```{r}
+tidylibr2 <- listatedata %>% 
+    gather(key, value, -STABR) %>% 
+    mutate(missing = ifelse(value==-1, "yes", "no"))
+#tidylibr2
+```
+
+```{r fig.height=6}
+ggplot(tidylibr2, aes(x = key, y = fct_rev(STABR), fill = missing)) +
+  geom_tile(color = "white") + 
+  ggtitle("Library Data of 2020 with NAs") +
+  ylab('') + 
+  scale_fill_viridis_d() + # discrete scale
+  theme_bw()
+```
+
+As we can see from the graph, the only row has missing data is the state with code 'VI' which is Virgin Islands. All other data is completed. As this state is an outlying area of the United States and missing data are primarily some statistic data about the revenue and resource data of the library, we believe it is reasonable to keep the data as '-1' in these rows which have little effect on our visualization.
+
+```{r}
+
+plot_missing(listatedatamis,percent=FALSE)
+
+```
+
+This graph shows the pattern further which is most rows (data of different state) is complete and provide us a relatively good data quality to analyze and visualize the libraries in US.
+
+#### Time series missing data analysis
+
+Moreover, to discuss the changing pattern of libraries in US, we collect library data in different years. Although we can easily read in all the raw data, band them together and select the variables we are interested in, we believe that to store such a large set of data makes the requirement of space of this project too big and the transforming progress takes a lot of time. As a result, we choose the variable in each years' data and store them in a csv file. As the data update once a year, it will not take too much time to add new data to this file. As for the data format, we keep it same with the original data and all the missing data is filled with '-1'.
+```{r}
+tidylibr3 <- listatetime %>% 
+    gather(key, value, -STABR) %>% 
+    mutate(missing = ifelse(value==-1, "yes", "no"))
+#tidylibr3
+```
+
+```{r fig.height=6}
+ggplot(tidylibr3, aes(x = key, y = fct_rev(STABR), fill = missing)) +
+  geom_tile(color = "white") + 
+  ggtitle("Library Time Series Data with NAs") +
+  ylab('') + 
+  scale_fill_viridis_d() + # discrete scale
+  theme_bw()
+```
+
+As we can see from the graph, there are three states having missing data through the years which are GU(Guam), MP(Northern Mariana Islands) and VI(Virgin Islands). All of these states are outlying area of the United States. Thus, we keep these data with its original form.
+
+
+```{r}
+plot_missing(listatetimemi,percent=FALSE)
+```
+
+As we can see in this chart, among all the rows having missing data, some of them missing quite a lot of data while others only miss one or two data. As we result, we would like to further see the missing data. We select all the rows of the three states and data is as below:
+
+```{r}
+MISS<-filter(listatetime,STABR %in% c("GU","VI","MP"))
+MISS
+```
+
+From the table, we can see that in some year(2016,2015), two of the states didn't report the data and among all the reported data, most of the missing data is in early years. As we would like to see the trend of the data, we also keep the original data in this data set in stead of filling them in some way.
