@@ -2,7 +2,7 @@
 
 ## Sources
 
-### Library Data Source
+### Museum Data Source
 The Museum data is from the official website of the Institute of Museum and Library Services(IMLS), and we use the latest version that collected in 2018. There are three csv files that contain different type of museums. The second file just contains GMU museums, the third file just contains HSC museums.
 
 The three files contain 7431, 7961, 14786 museums, and each file has 58 variables, including some basic information, like the id, location, contact, ruledate information, and the income and revenue information.

@@ -4,8 +4,8 @@ research-topic
 data-availability
 data
 sources
+museum-data-source
 library-data-source
-library-data-source-1
 cleaning-transformation
 museum-data-cleaning
 library-data-cleaning
@@ -17,6 +17,7 @@ results
 museum-in-us
 discipline-museums-distribution-in-states
 relationship-between-income-and-discipline
+relationship-between-location-and-revenue
 new-museums-trend
 library-in-us
 analysis-of-library-2020
