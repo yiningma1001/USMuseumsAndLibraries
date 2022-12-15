@@ -54,17 +54,23 @@ The sustainable development of museums can preserve local culture and history. H
 
 First, we can look at the distribution of museum income levels among different states. We can see that there is no significant difference in the distribution in terms of states in each income level, which means that the income level should not have a strong relationship with the development of the local museums. However, we still need further evidence to support our hypothesis.
 
-```{r}
+```{r,message=FALSE}
 #IncomeCD15 represents the level of income:
 museum_income <- subset(museum_dataset, select=c("INCOMECD15","GSTATE"))
 museum_income <- museum_income %>% drop_na()
-#check the relationship between income and disciplines:
-museum_income <- within(museum_income,
-                        INCOMECD15 <- factor(INCOMECD15,
-                                             levels=names(sort(table(INCOMECD15),
-                                                               decreasing=TRUE))))
-ggplot(museum_income, aes(x = INCOMECD15, fill = GSTATE)) + geom_bar()+
-  ggtitle("Income Level Distribution among All States")
+museum_income <- museum_income %>% group_by(GSTATE, INCOMECD15)%>%summarize(numbers=n())
+proportion<-museum_income %>%
+  group_by(GSTATE)%>%
+  mutate(proportion = 100*numbers/sum(numbers))%>%
+  ungroup
+
+ggplot(proportion, aes(x = GSTATE, y = INCOMECD15, fill=proportion)) +
+  geom_tile(aes(fill = proportion), color = "white") +
+  coord_fixed()+
+  ggtitle("Proportion of Different Income Ranges in Different States")+
+  scale_fill_gradient2(low = "black", mid = "white",
+                       high ="#3182bd", midpoint = .2)
+
 ```
 
 To examine the relationship between location and revenue further, we can use principal component analysis on `INCOME15`, `REVENUE15` (profit-related variables), `LONGITUDE`,`LATITUDE` (geographical variables).

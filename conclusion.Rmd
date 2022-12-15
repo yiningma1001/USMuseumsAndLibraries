@@ -9,6 +9,8 @@ We analyzed museums and libraries in US and found the following facts:
 
 3. The History related museums grow fast from 1950s to 2000s, and the art museum has a rapid growth in 1940s, which can reflect some social changes at different time.
 
+4. There is no correlation between geographical locations and museums' income (revenue) levels, which means that the current development of museums is according to local culture and history instead of being profit-seeking.
+
 ## Library
 We have several conclusion after our analysis:
 
