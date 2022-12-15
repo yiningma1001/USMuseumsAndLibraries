@@ -37,6 +37,7 @@ library("choroplethr")
 library("choroplethrMaps")
 library("ggthemes")
 library("redav")
+library("ggfortify")
 ```
 
 ```{r}
@@ -54,6 +55,9 @@ museum1<-rename(museum1, DISCIPLINE = DISCIPL)
 
 df_list <- list(museum1, museum2, museum3)
 museum<-Reduce(function(x, y) merge(x, y, all=TRUE), df_list, accumulate=FALSE)
+
+#read the processed data which will be used for PCA part:
+museum_dataset<- read.csv("./data/museumDataset.csv")
 ```
 
 ### Library Data Cleaning
