@@ -1,6 +1,6 @@
 # Results
 ## Museum in US
-### Discipline museums distribution in states
+### Discipline Museums Distribution in States
 
 ```{r fig.height=6}
 df_museum_dis <- museum_c %>% group_by(DISCIPLINE,ADSTATE)%>%
@@ -16,7 +16,7 @@ p1
 
 We can find that HSC(Historical Societies and Historic Preservation) and GMU(Uncategorized or General Museums) take great share in each state's museums, especially HSC. And the proportions of different disciplines in different states remains similar, which means there is no obvious tendency of a state to own one kind of museum more than other kinds.
 
-### Relationship between income and Discipline
+### Relationship Between Income and Discipline
 
 ```{r fig.height=6}
 df_museum_inc <- museum_c %>% group_by(DISCIPLINE, INCOMECD15)%>%
@@ -31,6 +31,7 @@ proportion<-df_museum_inc %>%
 
 ## since the number differs a lot between different disciplines and we are curious about the 
 ## income distribution within each discipline, we compare the proportion of different income groups
+
 ggplot(proportion, aes(x = DISCIPLINE, y = INCOMECD15, fill=proportion)) +
   geom_tile(aes(fill = proportion), color = "white") +
   coord_fixed()+
@@ -39,13 +40,15 @@ ggplot(proportion, aes(x = DISCIPLINE, y = INCOMECD15, fill=proportion)) +
                        high ="#3182bd", midpoint = .2) 
 ```
 
+The 0~9 of incomecd15 present different income ranges: 0, $1 to $9,999, $10,000 to $24,999, $25,000 to $99,999, $100,000 to $499,999, $500,000 to $999,999, $1,000,000 to $4,999,999, $5,000,000 to $9,999,999, $10,000,000 to $49,999,999, $50,000,000 to greater.
+
 It shows that there are a lot of museums did not provide their income status. In those museums that provided incomes, except ART and CMU, other discipline museums that did not have incomes take biggest share, especially HSC, since most of this kind of museum don't need tickets. 
 
 But since Art Museums are often charge highly, there are great proportion of Art museums earn income over 50,000,000 in 2015. And there are more CMU (children museum) earn between 25,000 and 4,999,999 than other incomes, which means most CMU need tickets and parents are willing to visit them to educate their kids.
 
 And for other kinds of museums, incomes between 25,000 and 4,999,999 also take some shares.
 
-### Relationship between Location and Revenue
+### Relationship Between Location and Revenue
 
 The sustainable development of museums can preserve local culture and history. However, it's possible to face the situation that museums with certain themes are more popular than others, hence the considerable income for local governments. It's essential to keep the balanced development for all categories instead of being profit-seeking. If the current development of the museum follows the local features, then the geographical location should be a dominant variable in terms of the distribution of the museum.
 
@@ -93,7 +96,7 @@ autoplot(result_pca, data = museum_subset,
 
 We can see that the vectors standing for the revenue and income are almost overlapping together, which means the data matched the collecting process as mentioned in the official guide: the income is calculated by using the revenue minus the operation cost in that year. Also, we can see that the distribution of museums follows the vectors of latitude and longitude closely, and the museum locations are not correlated with income and revenue since they are almost perpendicular to each other. Hence, the current development of museums is not profit-seeking since there is no relationship between location and revenue based on the above results.
 
-### New museums trend
+### New Museums Trend
 
 ```{r fig.height=6}
 df_year<-museum_c %>%
@@ -522,6 +525,7 @@ state_choropleth(df,
                  title = "Number of Library in US, 2020",
                  legend = "Number of Library")
 ```
+
 As we can see from the spatial graph, the state with higher number of library are clustered on the east side of the country especially the north east region while the state in the west east have relatively low number of libraries.
 
 ### Relationship between museum and library distributions

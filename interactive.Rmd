@@ -127,16 +127,18 @@ This is a interactive webpage related to our project. You can choose to guess th
       const state = d3.select(event.currentTarget).attr("id");
       const dx=d3.select(event.currentTarget).attr("x");
       const dy=d3.select(event.currentTarget).attr("y");
-      d3.select("g")
-        .append("text")
-        //d3.select("text")
-        .attr("x",d=>dx)
-        .attr("y",d=>dy)
-        .text(`This is ${state} state.`);
-      d3.select(event.currentTarget).attr("fill","pink");
+      if (state != null){
+        d3.select("g")
+          .append("text")
+          //d3.select("text")
+          .attr("x",d=>dx)
+          .attr("y",d=>dy)
+          .text(`This is ${state} state.`);
+        d3.select(event.currentTarget).attr("fill","pink");
+        }
         });
 }
-d3.select("#library")
+    d3.select("#library")
         .on("click", function () {
          d3.selectAll("svg").remove()
          drawbars(bardata,bardata2)
