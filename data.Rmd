@@ -7,7 +7,7 @@ The Museum data is from the official website of the Institute of Museum and Libr
 
 The three files contain 7431, 7961, 14786 museums, and each file has 58 variables, including some basic information, like the id, location, contact, ruledate information, and the income and revenue information.
 
-And we choose to mainly analyse the discipline, income and ruledate 
+And we choose to mainly analyse the state, discipline, income and the established dates, therefore, we select the relevant columns to conduct our analysis. The discipline contains 9 values, reflecting 9 kinds of museums; we choose IncomeCD15 to present museum income, which 9 ranges of income from 0 to 50,000,000 and greater; rule_date the registered nonprofit organization was recognized as having obtained their formal tax-exempt status by the IRS, we use this column to present the established date.
 
 ### Library Data Source
 The library data set is also from <https://www.imls.gov/> which is the website of the Institute of Museum and Library Service. This institute provide several data set regarding museum and library across the nation. We use the data set of The Public Libraries Survey (PLS) which supplied annually by public libraries across the country on when, where, and how library services are changing to meet the needs of the public.
@@ -23,6 +23,9 @@ The data set provides statistics on the status of public libraries in the United
 ## Cleaning / transformation
 
 ### Museum Data Cleaning
+We firstly select the columns that we need from three files and then modify the data type of ID from string to numeric to match each other and then merge them together. 
+
+Then we created different data frames group by state, discipline, income, and decades of the rule date to further show the distribution of museums in different disciplines and states, the relationships between variables, and the museum growth trends from 1900s to 2010s.
 ```{r}
 library("readxl")
 library("openintro")
@@ -75,16 +78,16 @@ statecode<-read.csv("./data/statecode.csv")
 
 ## Missing value analysis
 ### Museum Data
-if MID is missing, we think it is not a valid museum record, and delete. 
-There are 8677(28.8%) empty value in incomecd, and 8682(28.8%) emtpy value in rule data
-Most missing cases are missing 1 variable, and some are missing two, which mean missing ruledata and incomecd are not strongly correlated.
+
 ```{r}
 colSums(is.na(museum)) 
 plot_missing(museum, percent = TRUE)
 museum_c<-museum %>% drop_na(MID)
 ```
 
-
+There is no missing data in discipline and state, but are 8677(28.8%) empty value in incomecd, and 8682(28.8%) empty value in rule date.
+Most missing cases are missing rule date and incomecd together, which means missing these two variables are correlated.
+If MID is missing, we think it is not a valid museum record, and will delete this record. 
 
 ### Library Data
 We first visualize the missing data in our data set and discuss the pattern it has. This is an important step for us to under stand our data.
