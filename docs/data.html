@@ -100,7 +100,7 @@
 <ul>
 <li class="chapter" data-level="4.1" data-path="results.html"><a href="results.html#museum-in-us"><i class="fa fa-check"></i><b>4.1</b> Museum in US</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="results.html"><a href="results.html#the-distribution-of-museums-of-different-discipline"><i class="fa fa-check"></i><b>4.1.1</b> The distribution of museums of different discipline</a></li>
+<li class="chapter" data-level="4.1.1" data-path="results.html"><a href="results.html#discipline-museums-distribution-in-states"><i class="fa fa-check"></i><b>4.1.1</b> Discipline museums distribution in states</a></li>
 <li class="chapter" data-level="4.1.2" data-path="results.html"><a href="results.html#relationship-between-income-and-discipline"><i class="fa fa-check"></i><b>4.1.2</b> Relationship between income and Discipline</a></li>
 <li class="chapter" data-level="4.1.3" data-path="results.html"><a href="results.html#new-museums-trend"><i class="fa fa-check"></i><b>4.1.3</b> New museums trend</a></li>
 </ul></li>
@@ -113,6 +113,7 @@
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="results.html"><a href="results.html#museum-map"><i class="fa fa-check"></i><b>4.3.1</b> Museum map</a></li>
 <li class="chapter" data-level="4.3.2" data-path="results.html"><a href="results.html#library-map"><i class="fa fa-check"></i><b>4.3.2</b> Library map</a></li>
+<li class="chapter" data-level="4.3.3" data-path="results.html"><a href="results.html#relationship-between-museum-and-library-distributions"><i class="fa fa-check"></i><b>4.3.3</b> Relationship between museum and library distributions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>5</b> Interactive component</a></li>
@@ -144,7 +145,7 @@
 <h3><span class="header-section-number">3.1.1</span> Library Data Source<a href="data.html#library-data-source" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The Museum data is from the official website of the Institute of Museum and Library Services(IMLS), and we use the latest version that collected in 2018. There are three csv files that contain different type of museums. The second file just contains GMU museums, the third file just contains HSC museums.</p>
 <p>The three files contain 7431, 7961, 14786 museums, and each file has 58 variables, including some basic information, like the id, location, contact, ruledate information, and the income and revenue information.</p>
-<p>And we choose to mainly analyse the discipline, income and ruledate</p>
+<p>And we choose to mainly analyse the state, discipline, income and the established dates, therefore, we select the relevant columns to conduct our analysis. The discipline contains 9 values, reflecting 9 kinds of museums; we choose IncomeCD15 to present museum income, which 9 ranges of income from 0 to 50,000,000 and greater; rule_date the registered nonprofit organization was recognized as having obtained their formal tax-exempt status by the IRS, we use this column to present the established date.</p>
 </div>
 <div id="library-data-source-1" class="section level3 hasAnchor" number="3.1.2">
 <h3><span class="header-section-number">3.1.2</span> Library Data Source<a href="data.html#library-data-source-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -159,6 +160,8 @@
 <h2><span class="header-section-number">3.2</span> Cleaning / transformation<a href="data.html#cleaning-transformation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="museum-data-cleaning" class="section level3 hasAnchor" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Museum Data Cleaning<a href="data.html#museum-data-cleaning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We firstly select the columns that we need from three files and then modify the data type of ID from string to numeric to match each other and then merge them together.</p>
+<p>Then we created different data frames group by state, discipline, income, and decades of the rule date to further show the distribution of museums in different disciplines and states, the relationships between variables, and the museum growth trends from 1900s to 2010s.</p>
 </div>
 <div id="library-data-cleaning" class="section level3 hasAnchor" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Library Data Cleaning<a href="data.html#library-data-cleaning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -168,12 +171,12 @@
 <h2><span class="header-section-number">3.3</span> Missing value analysis<a href="data.html#missing-value-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="museum-data" class="section level3 hasAnchor" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Museum Data<a href="data.html#museum-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>if MID is missing, we think it is not a valid museum record, and delete.
-There are 8677(28.8%) empty value in incomecd, and 8682(28.8%) emtpy value in rule data
-Most missing cases are missing 1 variable, and some are missing two, which mean missing ruledata and incomecd are not strongly correlated.</p>
 <pre><code>##        MID DISCIPLINE    ADSTATE INCOMECD15 RULEDATE15 
 ##          3          0          0       8677       8682</code></pre>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p>There is no missing data in discipline and state, but are 8677(28.8%) empty value in incomecd, and 8682(28.8%) empty value in rule date.
+Most missing cases are missing rule date and incomecd together, which means missing these two variables are correlated.
+If MID is missing, we think it is not a valid museum record, and will delete this record.</p>
 </div>
 <div id="library-data" class="section level3 hasAnchor" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Library Data<a href="data.html#library-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -181,16 +184,16 @@ Most missing cases are missing 1 variable, and some are missing two, which mean 
 #### Library Data Set
 1. Library data of 2020
 In this project, we first analyze the data of Library in US in 2020. According to the document of the data set, all the missing data is filled with ‘-1’. Thus, we will visualize the distribution of ‘-1’ in this data set.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p>As we can see from the graph, the only row has missing data is the state with code ‘VI’ which is Virgin Islands. All other data is completed. As this state is an outlying area of the United States and missing data are primarily some statistic data about the revenue and resource data of the library, we believe it is reasonable to keep the data as ‘-1’ in these rows which have little effect on our visualization.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p>This graph shows the pattern further which is most rows (data of different state) is complete and provide us a relatively good data quality to analyze and visualize the libraries in US.</p>
 <div id="time-series-missing-data-analysis" class="section level4 hasAnchor" number="3.3.2.1">
 <h4><span class="header-section-number">3.3.2.1</span> Time series missing data analysis<a href="data.html#time-series-missing-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Moreover, to discuss the changing pattern of libraries in US, we collect library data in different years. Although we can easily read in all the raw data, band them together and select the variables we are interested in, we believe that to store such a large set of data makes the requirement of space of this project too big and the transforming progress takes a lot of time. As a result, we choose the variable in each years’ data and store them in a csv file. As the data update once a year, it will not take too much time to add new data to this file. As for the data format, we keep it same with the original data and all the missing data is filled with ‘-1’.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <p>As we can see from the graph, there are three states having missing data through the years which are GU(Guam), MP(Northern Mariana Islands) and VI(Virgin Islands). All of these states are outlying area of the United States. Thus, we keep these data with its original form.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <p>As we can see in this chart, among all the rows having missing data, some of them missing quite a lot of data while others only miss one or two data. As we result, we would like to further see the missing data. We select all the rows of the three states and data is as below:</p>
 <pre><code>##    STABR YEAR POPU_LSA CENTLIB BRANLIB BKMOB  BKVOL EBOOK VISITS
 ## 1     GU 2020   168678       1       5     0 286930     0  35115

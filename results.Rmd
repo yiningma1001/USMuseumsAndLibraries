@@ -1,22 +1,24 @@
 # Results
 ## Museum in US
-### The distribution of museums of different discipline
+### Discipline museums distribution in states
 
-```{r}
+```{r fig.height=6}
 df_museum_dis <- museum_c %>% group_by(DISCIPLINE,ADSTATE)%>%
   summarize(numbers=n()) 
 
 p1<-ggplot(data = df_museum_dis, aes(x = reorder(ADSTATE,numbers,sum), y=numbers, fill=DISCIPLINE)) + 
   geom_bar(stat="identity")+
+  ggtitle("Numbers of Different Discipline Museums in Every State") +
+  xlab("state")+
   coord_flip()
 p1
 ```
 
-We can find that HSC(Historical Societies / Historic Preservation) and GMU(Uncategorized or General Museums) take great share in each state's museums, especially HSC. And the proportions of different disciplines in different states remains similar, which means there is no tendency of a state to own one kind of museum more.
+We can find that HSC(Historical Societies and Historic Preservation) and GMU(Uncategorized or General Museums) take great share in each state's museums, especially HSC. And the proportions of different disciplines in different states remains similar, which means there is no obvious tendency of a state to own one kind of museum more than other kinds.
 
 ### Relationship between income and Discipline
 
-```{r}
+```{r fig.height=6}
 df_museum_inc <- museum_c %>% group_by(DISCIPLINE, INCOMECD15)%>%
   summarize(numbers=n()) 
 df_museum_inc<-transform(df_museum_inc, INCOMECD15 = as.character(INCOMECD15))
@@ -32,33 +34,38 @@ proportion<-df_museum_inc %>%
 ggplot(proportion, aes(x = DISCIPLINE, y = INCOMECD15, fill=proportion)) +
   geom_tile(aes(fill = proportion), color = "white") +
   coord_fixed()+
+  ggtitle("Proportion of Different Income Ranges in Different Disciplines")+
   scale_fill_gradient2(low = "black", mid = "white",
                        high ="#3182bd", midpoint = .2) 
 ```
 
-It shows that there are a lot of museums did not provide their income status. In those museums that provided incomes, except ART and CMU, museums of other disciplines that did not have incomes takes biggest share, especially HSC, since most of this kind of museum don't need tickets. 
+It shows that there are a lot of museums did not provide their income status. In those museums that provided incomes, except ART and CMU, other discipline museums that did not have incomes take biggest share, especially HSC, since most of this kind of museum don't need tickets. 
 
-And also incomes between 25,000 and 4,999,999 take some shares. But since Art Museums are often charge highly, there are great proportion of Art museums earn income over 50,000,000 in 2015.
+But since Art Museums are often charge highly, there are great proportion of Art museums earn income over 50,000,000 in 2015. And there are more CMU (children museum) earn between 25,000 and 4,999,999 than other incomes, which means most CMU need tickets and parents are willing to visit them to educate their kids.
+
+And for other kinds of museums, incomes between 25,000 and 4,999,999 also take some shares.
 
 ### New museums trend
 
-```{r}
+```{r fig.height=6}
 df_year<-museum_c %>%
   mutate(rule_year=as.numeric(substr(RULEDATE15,1,4)))%>%
   filter(rule_year>0) %>%
   #filter(DISCIPLINE!="HSC") %>%
-  mutate(decate=floor(rule_year/10)*10)%>%
-  group_by(decate, DISCIPLINE)%>%
+  mutate(decade=floor(rule_year/10)*10)%>%
+  group_by(decade, DISCIPLINE)%>%
   summarise(number=n())
 
-ggplot(df_year, aes(x=decate, y=number, group= DISCIPLINE, color= DISCIPLINE)) +
-  geom_line()
+ggplot(df_year, aes(x=decade, y=number, group= DISCIPLINE, color= DISCIPLINE)) +
+  ggtitle("Number of New Museums by Decade")+
+  geom_point()+
+  geom_line(size=1)
 ```
 
-The numbers of most kinds of museums increase slowly since 1920s to 2000s. Since the data is collected in 2018, the new museum numbers cannot present the total 2010s. However, there is an obvious increase of HSC number from 1950s to 2000s, which indicates that the government established lots of Historical Societies / Historic Preservation after 1950s. 
+The numbers of most kinds of museums increase slowly since 1920s to 2000s. Since the data is collected in 2018, the new museum numbers cannot present the total 2010s. Before 2010s, there is an obvious increase of HSC from 1950s to 2000s, which indicates that the government established lots of Historical Societies/ Historic Preservation after 1950s. 
 
-Besides that, the numbers of GMU and HST also increased a lot. The rapid growth of history related museum reflects that we care about our history more and more in recent days.
-Also, the number of art museum in 1940s has an obvious increase, which means people at that time the fasion of enjoying art was prevailing.
+Besides that, the numbers of GMU and HST also increased a lot. The rapid growth of history related museum reflects that we care about history more and more in recent days.
+Also, the number of art museum in 1940s has an obvious increase, which means the fashion of enjoying art was prevailing at that time.
 
 ## Library in US
 ### Analysis of Library 2020
@@ -401,4 +408,12 @@ state_choropleth(df,
                  title = "State Library Number, 2020",
                  legend = "Number of Library")
 ```
-As we can see from the spatial graph, the state with higher number of library are clustered on the east side of the country especially the north east region while the state in the west east have relatively low number of library.
+As we can see from the spatial graph, the state with higher number of library are clustered on the east side of the country especially the north east region while the state in the west east have relatively low number of libraries.
+
+### Relationship between museum and library distributions
+
+Based on the two graphs above, we can clearly tell there is strong correlation between the number of museums and of libraries, which indicates that both museums and libraries play similar roles in people's daily life and can reflect some cultural development status of that area. 
+
+We found north east and south west regions having more museums and libraries, which except indicating there might have more population, also reflecting that people in there regions seem to enjoy cultural life more.
+
+In addition, there exist some difference between museum and library distributions, states owing many libraries may have less museums, like Utah, on the contrary, states owing many museums may have less libraries, like North Dakota. We think it may be related to some specially local preferences.
