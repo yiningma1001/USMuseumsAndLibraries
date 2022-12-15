@@ -1,2 +1,14 @@
 # Conclusion
+## Museum
+
+## Library
+We have several conclusion after our analysis:
+
+1. California, New York, Ohio, Kansas, Texas are among those states with most well developed library system. They have a relatively high number of library in the state and relatively high amount of electronic or printed material in the libraries. The annual visitor of the libraries are also relatively high. This pattern is partly due to these states have more dense population and also the government attach importance on the development of library.
+
+2. Through the time series analysis, we found that the annual visitors of library are decreasing slowly during the past 15 years which probably due to the development of internet and people have more kinds of entertainment in the spare time. However, the sharp drop of the number of people visiting library in between 2019 and 2020 which is more likely due to the pandemic.
+
+3. Additionally, we can see the development and spread of ebook and other electronic resource in the past ten years as many the ebook resource in many states' library increased quickly during the past years.
+
+4. Last but not least, by comparing the library data with museum data, we can see that states with well developed library also tend to have well developed museum. The north east region and California tend to have more library and museum related resources while the north west tend to have less. This is reasonable as library and museum are both important part of cultural development of a country or a region. Also there might be some history reason as some of the states have much longer history and are believed to be well developed region across the country and has higher population.
 

@@ -117,7 +117,11 @@
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>5</b> Interactive component</a></li>
-<li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a></li>
+<li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="interactive-component.html"><a href="interactive-component.html#museum"><i class="fa fa-check"></i><b>6.1</b> Museum</a></li>
+<li class="chapter" data-level="6.2" data-path="interactive-component.html"><a href="interactive-component.html#library"><i class="fa fa-check"></i><b>6.2</b> Library</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -165,6 +169,7 @@
 </div>
 <div id="library-data-cleaning" class="section level3 hasAnchor" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Library Data Cleaning<a href="data.html#library-data-cleaning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The data format in the library data set is quite clean and suitable for us to use. Thus, we didn’t do much on cleaning them but only went through the variables in the data set and select the variables that we are interested in. The state data in the data set is coded. As a result, we used another data set which contains the name of state and the code of state and combine them to get the state name we need.</p>
 </div>
 </div>
 <div id="missing-value-analysis" class="section level2 hasAnchor" number="3.3">
@@ -173,7 +178,7 @@
 <h3><span class="header-section-number">3.3.1</span> Museum Data<a href="data.html#museum-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <pre><code>##        MID DISCIPLINE    ADSTATE INCOMECD15 RULEDATE15 
 ##          3          0          0       8677       8682</code></pre>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>There is no missing data in discipline and state, but are 8677(28.8%) empty value in incomecd, and 8682(28.8%) empty value in rule date.
 Most missing cases are missing rule date and incomecd together, which means missing these two variables are correlated.
 If MID is missing, we think it is not a valid museum record, and will delete this record.</p>
@@ -184,16 +189,16 @@ If MID is missing, we think it is not a valid museum record, and will delete thi
 #### Library Data Set
 1. Library data of 2020
 In this project, we first analyze the data of Library in US in 2020. According to the document of the data set, all the missing data is filled with ‘-1’. Thus, we will visualize the distribution of ‘-1’ in this data set.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>As we can see from the graph, the only row has missing data is the state with code ‘VI’ which is Virgin Islands. All other data is completed. As this state is an outlying area of the United States and missing data are primarily some statistic data about the revenue and resource data of the library, we believe it is reasonable to keep the data as ‘-1’ in these rows which have little effect on our visualization.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>This graph shows the pattern further which is most rows (data of different state) is complete and provide us a relatively good data quality to analyze and visualize the libraries in US.</p>
 <div id="time-series-missing-data-analysis" class="section level4 hasAnchor" number="3.3.2.1">
 <h4><span class="header-section-number">3.3.2.1</span> Time series missing data analysis<a href="data.html#time-series-missing-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Moreover, to discuss the changing pattern of libraries in US, we collect library data in different years. Although we can easily read in all the raw data, band them together and select the variables we are interested in, we believe that to store such a large set of data makes the requirement of space of this project too big and the transforming progress takes a lot of time. As a result, we choose the variable in each years’ data and store them in a csv file. As the data update once a year, it will not take too much time to add new data to this file. As for the data format, we keep it same with the original data and all the missing data is filled with ‘-1’.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>As we can see from the graph, there are three states having missing data through the years which are GU(Guam), MP(Northern Mariana Islands) and VI(Virgin Islands). All of these states are outlying area of the United States. Thus, we keep these data with its original form.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>As we can see in this chart, among all the rows having missing data, some of them missing quite a lot of data while others only miss one or two data. As we result, we would like to further see the missing data. We select all the rows of the three states and data is as below:</p>
 <pre><code>##    STABR YEAR POPU_LSA CENTLIB BRANLIB BKMOB  BKVOL EBOOK VISITS
 ## 1     GU 2020   168678       1       5     0 286930     0  35115

@@ -82,7 +82,7 @@ popstate %>%
   pivot_longer(cols=!STABR,names_to = "type",values_to = "value") %>%
   ggplot(aes(x=value, y=fct_reorder2(STABR,type=='POPU_LSA',value,.desc=FALSE), color = type)) +
   geom_point() +
-  ggtitle("Population, Number of People Visit Library and Number of Registers in Different States") +
+  ggtitle("Population, Number of People Visit Library and Number of Registers \n in Different States, 2020") +
   ylab("") +
   theme_linedraw()
 ```
@@ -116,8 +116,8 @@ gnumofLi<-ggplot(data = numliPostate_tidy, aes(x = factor(STABR, levels = order$
   xlab("State") +
   ylab("Number of Library") +
   guides(fill=guide_legend(title="Library Type")) +
-  ggtitle("Number of Libraries in Different States Ordered by State's Poluation") +
-  theme(plot.title = element_text(hjust = 0.5,size=15)) +
+  ggtitle("Number of Libraries in Different States Ordered by State's Poluation, 2020") +
+  theme(plot.title = element_text(hjust = 0.5,size=12)) +
   scale_y_continuous() +
   coord_flip()
 gnumofLi
@@ -138,8 +138,8 @@ gnumofLi<-ggplot(data = numliPostate_tidy, aes(x = factor(STABR, levels = order2
   xlab("State") +
   ylab("Number of Library") +
   guides(fill=guide_legend(title="Library Type")) +
-  ggtitle("Number of Libraries in Different States") +
-  theme(plot.title = element_text(hjust = 0.5,size=15)) +
+  ggtitle("Number of Libraries in Different States, 2020") +
+  theme(plot.title = element_text(hjust = 0.5,size=12)) +
   scale_y_continuous() +
   coord_flip()
 gnumofLi
@@ -168,8 +168,8 @@ ggplot(data = numCostate_tidy, aes(x = factor(STABR, levels = order2$STABR), y =
   xlab("State") +
   ylab("Number of Resource") +
   guides(fill=guide_legend(title="Resource Type")) +
-  ggtitle("Resource in Different States' Library Ordered by Number of Library") +
-  theme(plot.title = element_text(hjust = 0.5,size=15)) +
+  ggtitle("Resource in Different States' Library Ordered by Number of Library, 2020") +
+  theme(plot.title = element_text(hjust = 0.5,size=12)) +
   scale_y_continuous() +
   coord_flip()
 ```
@@ -199,8 +199,8 @@ ggplot(data = numEvstate_tidy, aes(x = factor(STABR, levels = order2$STABR), y =
   xlab("State") +
   ylab("Number of Event") +
   guides(fill=guide_legend(title="Event Type")) +
-  ggtitle("Events in Different States' library Ordered by Number of Library") +
-  theme(plot.title = element_text(hjust = 0.5,size=15)) +
+  ggtitle("Events in Different States' library Ordered by Number of Library, 2020") +
+  theme(plot.title = element_text(hjust = 0.5,size=12)) +
   scale_y_continuous() +
   coord_flip()
 ```
@@ -227,8 +227,8 @@ ggplot(data = revstate_tidy, aes(x = factor(STABR, levels = order2$STABR), y = a
   xlab("State") +
   ylab("Amount of Revenue") +
   guides(fill=guide_legend(title="Revenue Type")) +
-  ggtitle("Amount of Revenue Received by Different States' Librariey Ordered by Number of Library") +
-  theme(plot.title = element_text(hjust = 0.5,size=15)) +
+  ggtitle("Amount of Revenue Received by Different States' Library \n Ordered by Number of Library, 2020") +
+  theme(plot.title = element_text(hjust = 0.5,size=12)) +
   scale_y_continuous() +
   coord_flip()
 ```
@@ -389,7 +389,7 @@ df_museum_c<-left_join(df_museum, statecode, by=c("ADSTATE"="code"))
 df_museum_c<-transmute(df_museum_c,region=tolower(`state`),value=numbers)
 
 state_choropleth(df_museum_c,
-                 title = "State Museum Number, 2020",
+                 title = "Number of Museum in US, 2020",
                  legend = "Number of Museum")
 #df_musesum_c$state <- tolower(df_musesum_c$state)
 #us_states_museum <- left_join(us_states, df_musesum_c,by=c("region"="state"))
@@ -405,7 +405,7 @@ data2<-inner_join(numli,statecode,by=c("STABR"="code"))
 df<-transmute(data2,region = tolower(`state`),value=CENTLIB+BRANLIB+BKMOB)
 #df
 state_choropleth(df,
-                 title = "State Library Number, 2020",
+                 title = "Number of Library in US, 2020",
                  legend = "Number of Library")
 ```
 As we can see from the spatial graph, the state with higher number of library are clustered on the east side of the country especially the north east region while the state in the west east have relatively low number of libraries.

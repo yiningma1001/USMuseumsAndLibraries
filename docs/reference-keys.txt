@@ -38,3 +38,5 @@ library-map
 relationship-between-museum-and-library-distributions
 interactive-component
 conclusion
+museum
+library
