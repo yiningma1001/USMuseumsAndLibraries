@@ -75,6 +75,7 @@ statecode<-read.csv("./data/statecode.csv")
 #statecode
 ```
 
+The data format in the library data set is quite clean and suitable for us to use. Thus, we didn't do much on cleaning them but only went through the variables in the data set and select the variables that we are interested in. The state data in the data set is coded. As a result, we used another data set which contains the name of state and the code of state and combine them to get the state name we need.
 
 ## Missing value analysis
 ### Museum Data
