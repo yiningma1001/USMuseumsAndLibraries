@@ -23,7 +23,7 @@
 <meta name="author" content="Group 5: Yuanyi Hu, Yining Ma, Yi Zhuang" />
 
 
-<meta name="date" content="2022-12-14" />
+<meta name="date" content="2022-12-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -82,8 +82,8 @@
 <ul>
 <li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#sources"><i class="fa fa-check"></i><b>3.1</b> Sources</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="data.html"><a href="data.html#library-data-source"><i class="fa fa-check"></i><b>3.1.1</b> Library Data Source</a></li>
-<li class="chapter" data-level="3.1.2" data-path="data.html"><a href="data.html#library-data-source-1"><i class="fa fa-check"></i><b>3.1.2</b> Library Data Source</a></li>
+<li class="chapter" data-level="3.1.1" data-path="data.html"><a href="data.html#museum-data-source"><i class="fa fa-check"></i><b>3.1.1</b> Museum Data Source</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data.html"><a href="data.html#library-data-source"><i class="fa fa-check"></i><b>3.1.2</b> Library Data Source</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#cleaning-transformation"><i class="fa fa-check"></i><b>3.2</b> Cleaning / transformation</a>
 <ul>
@@ -102,7 +102,8 @@
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="results.html"><a href="results.html#discipline-museums-distribution-in-states"><i class="fa fa-check"></i><b>4.1.1</b> Discipline museums distribution in states</a></li>
 <li class="chapter" data-level="4.1.2" data-path="results.html"><a href="results.html#relationship-between-income-and-discipline"><i class="fa fa-check"></i><b>4.1.2</b> Relationship between income and Discipline</a></li>
-<li class="chapter" data-level="4.1.3" data-path="results.html"><a href="results.html#new-museums-trend"><i class="fa fa-check"></i><b>4.1.3</b> New museums trend</a></li>
+<li class="chapter" data-level="4.1.3" data-path="results.html"><a href="results.html#relationship-between-location-and-revenue"><i class="fa fa-check"></i><b>4.1.3</b> Relationship between Location and Revenue</a></li>
+<li class="chapter" data-level="4.1.4" data-path="results.html"><a href="results.html#new-museums-trend"><i class="fa fa-check"></i><b>4.1.4</b> New museums trend</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="results.html"><a href="results.html#library-in-us"><i class="fa fa-check"></i><b>4.2</b> Library in US</a>
 <ul>
@@ -145,14 +146,14 @@
 <h1><span class="header-section-number">Chapter 3</span> Data<a href="data.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="sources" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Sources<a href="data.html#sources" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="library-data-source" class="section level3 hasAnchor" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Library Data Source<a href="data.html#library-data-source" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="museum-data-source" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Museum Data Source<a href="data.html#museum-data-source" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The Museum data is from the official website of the Institute of Museum and Library Services(IMLS), and we use the latest version that collected in 2018. There are three csv files that contain different type of museums. The second file just contains GMU museums, the third file just contains HSC museums.</p>
 <p>The three files contain 7431, 7961, 14786 museums, and each file has 58 variables, including some basic information, like the id, location, contact, ruledate information, and the income and revenue information.</p>
 <p>And we choose to mainly analyse the state, discipline, income and the established dates, therefore, we select the relevant columns to conduct our analysis. The discipline contains 9 values, reflecting 9 kinds of museums; we choose IncomeCD15 to present museum income, which 9 ranges of income from 0 to 50,000,000 and greater; rule_date the registered nonprofit organization was recognized as having obtained their formal tax-exempt status by the IRS, we use this column to present the established date.</p>
 </div>
-<div id="library-data-source-1" class="section level3 hasAnchor" number="3.1.2">
-<h3><span class="header-section-number">3.1.2</span> Library Data Source<a href="data.html#library-data-source-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="library-data-source" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Library Data Source<a href="data.html#library-data-source" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The library data set is also from <a href="https://www.imls.gov/" class="uri">https://www.imls.gov/</a> which is the website of the Institute of Museum and Library Service. This institute provide several data set regarding museum and library across the nation. We use the data set of The Public Libraries Survey (PLS) which supplied annually by public libraries across the country on when, where, and how library services are changing to meet the needs of the public.</p>
 <p>The data was collected by the institute. The survey is administered by Data Coordinators and the requested data was collected from local public libraries. There is a web-based reporting system State Data Coordinators used report data to the institute.</p>
 <p>The survey was conducted annually since 1988 and the website provides data files since 1992. During past years, the content on the survey changed 3 times and the format of the data sets are slightly differences.</p>
