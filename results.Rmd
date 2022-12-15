@@ -45,6 +45,37 @@ But since Art Museums are often charge highly, there are great proportion of Art
 
 And for other kinds of museums, incomes between 25,000 and 4,999,999 also take some shares.
 
+### Relationship between Location and Revenue
+
+The sustainable development of museums can preserve local culture and history. However, it's possible to face the situation that museums with certain themes are more popular than others, hence the considerable income for local governments. It's essential to keep the balanced development for all categories instead of being profit-seeking. If the current development of the museum follows the local features, then the geographical location should be a dominant variable in terms of the distribution of the museum. To examine the relationship between location and revenue, we can use principal component analysis on `INCOME15`, `REVENUE15` (profit-related variables), `LONGITUDE`,`LATITUDE` (geographical variables).
+
+```{r}
+museum_subset <- subset(museum_dataset, 
+                        select=c("DISCIPL", "GSTATE","INCOME15", 
+                                 "REVENUE15","LONGITUDE","LATITUDE"))
+
+museum_subset <- museum_subset[complete.cases(museum_subset),]
+
+museum_PCA <- subset(museum_dataset, 
+                     select=c("INCOME15", "REVENUE15","LONGITUDE","LATITUDE"))
+
+museum_PCA <- museum_PCA[complete.cases(museum_PCA),]
+```
+```{r,warning=FALSE}
+
+result_pca <- prcomp(museum_PCA, scale = TRUE)
+
+autoplot(result_pca, data = museum_subset, 
+         colour = "DISCIPL", loadings = TRUE, loadings.label = TRUE, 
+         loadings.label.size = 3)+ xlim(c(-0.1, 0.1))+ ylim(c(-0.04,0.06))
+
+autoplot(result_pca, data = museum_subset, 
+         colour = "GSTATE", loadings = TRUE, loadings.label = TRUE, 
+         loadings.label.size = 3)+ xlim(c(-0.05, 0.1))+ylim(c(-0.04,0.06))
+```
+
+We can see that the vectors standing for the revenue and income are almost overlapping together, which means the data matched the collecting process as mentioned in the official guide: the income is calculated by using the revenue minus the operation cost in that year. Also, we can see that the distribution of museums follows the vectors of latitude and longitude closely, and the museum locations are not correlated with income and revenue since they are almost perpendicular to each other. Hence, the current development of museums is not profit-seeking since there is no relationship between location and revenue based on the above results.
+
 ### New museums trend
 
 ```{r fig.height=6}
