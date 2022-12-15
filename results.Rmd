@@ -47,7 +47,24 @@ And for other kinds of museums, incomes between 25,000 and 4,999,999 also take s
 
 ### Relationship between Location and Revenue
 
-The sustainable development of museums can preserve local culture and history. However, it's possible to face the situation that museums with certain themes are more popular than others, hence the considerable income for local governments. It's essential to keep the balanced development for all categories instead of being profit-seeking. If the current development of the museum follows the local features, then the geographical location should be a dominant variable in terms of the distribution of the museum. To examine the relationship between location and revenue, we can use principal component analysis on `INCOME15`, `REVENUE15` (profit-related variables), `LONGITUDE`,`LATITUDE` (geographical variables).
+The sustainable development of museums can preserve local culture and history. However, it's possible to face the situation that museums with certain themes are more popular than others, hence the considerable income for local governments. It's essential to keep the balanced development for all categories instead of being profit-seeking. If the current development of the museum follows the local features, then the geographical location should be a dominant variable in terms of the distribution of the museum.
+
+First, we can look at the distribution of museum income levels among different states. We can see that there is no significant difference in the distribution in terms of states in each income level, which means that the income level should not have a strong relationship with the development of the local museums. However, we still need further evidence to support our hypothesis.
+
+```{r}
+#IncomeCD15 represents the level of income:
+museum_income <- subset(museum_dataset, select=c("INCOMECD15","GSTATE"))
+museum_income <- museum_income %>% drop_na()
+#check the relationship between income and disciplines:
+museum_income <- within(museum_income,
+                        INCOMECD15 <- factor(INCOMECD15,
+                                             levels=names(sort(table(INCOMECD15),
+                                                               decreasing=TRUE))))
+ggplot(museum_income, aes(x = INCOMECD15, fill = GSTATE)) + geom_bar()+
+  ggtitle("Income Level Distribution among All States")
+```
+
+To examine the relationship between location and revenue further, we can use principal component analysis on `INCOME15`, `REVENUE15` (profit-related variables), `LONGITUDE`,`LATITUDE` (geographical variables).
 
 ```{r}
 museum_subset <- subset(museum_dataset, 
