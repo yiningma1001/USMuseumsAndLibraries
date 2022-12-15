@@ -94,7 +94,7 @@ There is no missing data in discipline and state, but are 8677(28.8%) empty valu
 Most missing cases are missing rule date and incomecd together, which means missing these two variables are correlated.
 If MID is missing, we think it is not a valid museum record, and will delete this record.
 
-The overall situation for missing data is reasonable since we can restore the shape of the map of the USA by plotting the rest of the data according to each pair of the location variable.
+We can see that after removing missing data, the rest of data is still representative since we can restore the shape of the map of the USA by plotting the rest of the data according to each pair of the location variable. This means that data collection covers each state and the amount of missing data is reasonable because the rest of data keeps the key geographic and discipline information. Hence, it's valid to explore the distribution of disciplines and locations in the following sections by using the rest of data.
 
 ```{r}
 museum_coordinates <- subset(museum_dataset, select=c("LONGITUDE","LATITUDE","DISCIPL"))
