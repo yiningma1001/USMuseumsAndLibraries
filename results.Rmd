@@ -54,7 +54,7 @@ The sustainable development of museums can preserve local culture and history. H
 
 First, we can look at the distribution of museum income levels among different states. We can see that there is no significant difference in the distribution in terms of states in each income level, which means that the income level should not have a strong relationship with the development of the local museums. However, we still need further evidence to support our hypothesis.
 
-```{r,message=FALSE}
+```{r,message=FALSE, fig.width=11}
 #IncomeCD15 represents the level of income:
 museum_income <- subset(museum_dataset, select=c("INCOMECD15","GSTATE"))
 museum_income <- museum_income %>% drop_na()
@@ -95,9 +95,9 @@ autoplot(result_pca, data = museum_subset,
          colour = "DISCIPL", loadings = TRUE, loadings.label = TRUE, 
          loadings.label.size = 3)+ xlim(c(-0.1, 0.1))+ ylim(c(-0.04,0.06))
 
-autoplot(result_pca, data = museum_subset, 
-         colour = "GSTATE", loadings = TRUE, loadings.label = TRUE, 
-         loadings.label.size = 3)+ xlim(c(-0.05, 0.1))+ylim(c(-0.04,0.06))
+##autoplot(result_pca, data = museum_subset, 
+##         colour = "GSTATE", loadings = TRUE, loadings.label = TRUE, 
+##         loadings.label.size = 3)+ xlim(c(-0.05, 0.1))+ylim(c(-0.04,0.06))
 ```
 
 We can see that the vectors standing for the revenue and income are almost overlapping together, which means the data matched the collecting process as mentioned in the official guide: the income is calculated by using the revenue minus the operation cost in that year. Also, we can see that the distribution of museums follows the vectors of latitude and longitude closely, and the museum locations are not correlated with income and revenue since they are almost perpendicular to each other. Hence, the current development of museums is not profit-seeking since there is no relationship between location and revenue based on the above results.
