@@ -188,16 +188,20 @@ If MID is missing, we think it is not a valid museum record, and will delete thi
 </div>
 <div id="library-data" class="section level3 hasAnchor" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Library Data<a href="data.html#library-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We first visualize the missing data in our data set and discuss the pattern it has. This is an important step for us to under stand our data.
-#### Library Data Set
-1. Library data of 2020
-In this project, we first analyze the data of Library in US in 2020. According to the document of the data set, all the missing data is filled with ‘-1’. Thus, we will visualize the distribution of ‘-1’ in this data set.</p>
+<p>We first visualize the missing data in our data set and discuss the pattern it has. This is an important step for us to under stand our data.</p>
+<div id="library-data-set" class="section level4 hasAnchor" number="3.3.2.1">
+<h4><span class="header-section-number">3.3.2.1</span> Library Data Set<a href="data.html#library-data-set" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li>Library data of 2020
+In this project, we first analyze the data of Library in US in 2020. According to the document of the data set, all the missing data is filled with ‘-1’. Thus, we will visualize the distribution of ‘-1’ in this data set.</li>
+</ol>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>As we can see from the graph, the only row has missing data is the state with code ‘VI’ which is Virgin Islands. All other data is completed. As this state is an outlying area of the United States and missing data are primarily some statistic data about the revenue and resource data of the library, we believe it is reasonable to keep the data as ‘-1’ in these rows which have little effect on our visualization.</p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>This graph shows the pattern further which is most rows (data of different state) is complete and provide us a relatively good data quality to analyze and visualize the libraries in US.</p>
-<div id="time-series-missing-data-analysis" class="section level4 hasAnchor" number="3.3.2.1">
-<h4><span class="header-section-number">3.3.2.1</span> Time series missing data analysis<a href="data.html#time-series-missing-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+<div id="time-series-missing-data-analysis" class="section level4 hasAnchor" number="3.3.2.2">
+<h4><span class="header-section-number">3.3.2.2</span> Time series missing data analysis<a href="data.html#time-series-missing-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Moreover, to discuss the changing pattern of libraries in US, we collect library data in different years. Although we can easily read in all the raw data, band them together and select the variables we are interested in, we believe that to store such a large set of data makes the requirement of space of this project too big and the transforming progress takes a lot of time. As a result, we choose the variable in each years’ data and store them in a csv file. As the data update once a year, it will not take too much time to add new data to this file. As for the data format, we keep it same with the original data and all the missing data is filled with ‘-1’.</p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>As we can see from the graph, there are three states having missing data through the years which are GU(Guam), MP(Northern Mariana Islands) and VI(Virgin Islands). All of these states are outlying area of the United States. Thus, we keep these data with its original form.</p>
