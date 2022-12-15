@@ -178,12 +178,12 @@
 <h2><span class="header-section-number">3.3</span> Missing value analysis<a href="data.html#missing-value-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="museum-data" class="section level3 hasAnchor" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Museum Data<a href="data.html#museum-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<pre><code>##        MID DISCIPLINE    ADSTATE INCOMECD15 RULEDATE15 
-##          3          0          0       8677       8682</code></pre>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>There is no missing data in discipline and state, but are 8677(28.8%) empty value in incomecd, and 8682(28.8%) empty value in rule date.
 Most missing cases are missing rule date and incomecd together, which means missing these two variables are correlated.
 If MID is missing, we think it is not a valid museum record, and will delete this record.</p>
+<pre><code>##        MID DISCIPLINE    ADSTATE INCOMECD15 RULEDATE15 
+##          3          0          0       8677       8682</code></pre>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>We can see that after removing missing data, the rest of data is still representative since we can restore the shape of the map of the USA by plotting the rest of the data according to each pair of the location variable. This means that data collection covers each state and the amount of missing data is reasonable because the rest of data keeps the key geographic and discipline information. Hence, it’s valid to explore the distribution of disciplines and locations in the following sections by using the rest of data.</p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
