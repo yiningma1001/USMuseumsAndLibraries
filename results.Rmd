@@ -210,6 +210,28 @@ numCostate_tidy<-numCostate%>%
 #numCostate_tidy
 ```
 
+
+```{r}
+order3 <- numCostate %>% 
+  mutate(numCo=PrintMaterial+eBook+Audio_Physical+Audio_Digit+Viedo_Physical+Viedo_Digit+OtherElectronic)%>%
+  arrange(numCo) %>% 
+  mutate(STABR = factor(STABR))
+```
+
+
+```{r fig.height=8}
+ggplot(data = numCostate_tidy, aes(x = factor(STABR, levels = order3$STABR), y = numberofresource, fill = resourcetype)) +
+  geom_bar(stat="identity") +
+  xlab("State") +
+  ylab("Number of Resource") +
+  guides(fill=guide_legend(title="Resource Type")) +
+  ggtitle("Resource in Different States' Library, 2020") +
+  theme(plot.title = element_text(hjust = 0.5,size=12)) +
+  scale_y_continuous() +
+  coord_flip()
+```
+
+
 ```{r fig.height=8}
 ggplot(data = numCostate_tidy, aes(x = factor(STABR, levels = order2$STABR), y = numberofresource, fill = resourcetype)) +
   geom_bar(stat="identity") +
@@ -221,6 +243,8 @@ ggplot(data = numCostate_tidy, aes(x = factor(STABR, levels = order2$STABR), y =
   scale_y_continuous() +
   coord_flip()
 ```
+
+We first use a stacked bar chart ordered by the add up number of resource of each state. Then we draw a stacked bar chart ordered by the total number of library in each state to show the relationship between number of resource and number of library while keep the pattern of different kind of resource and the state's name.
 
 There are several kinds of resource in each library: printed material, audio resource in physical format or digital format, video resource in physical format or digital format, ebook, state digital resource and other electronic resource. As the last two kinds are relatively small, we combine them together and set as a new group 'other digital resource'. 
 
@@ -240,6 +264,24 @@ numEvstate_tidy<-numEvstate%>%
 #numEvstate_tidy
 ```
 
+```{r}
+order4 <- numEvstate %>% 
+  mutate(numEv=Childrenprogram+YoungAdultProgram+OtherProgram)%>%
+  arrange(numEv) %>% 
+  mutate(STABR = factor(STABR))
+```
+
+```{r fig.height=8}
+ggplot(data = numEvstate_tidy, aes(x = factor(STABR, levels = order4$STABR), y = numberofevent, fill = eventtype)) +
+  geom_bar(stat="identity") +
+  xlab("State") +
+  ylab("Number of Event") +
+  guides(fill=guide_legend(title="Event Type")) +
+  ggtitle("Events in Different States' library, 2020") +
+  theme(plot.title = element_text(hjust = 0.5,size=12)) +
+  scale_y_continuous() +
+  coord_flip()
+```
 
 ```{r fig.height=8}
 ggplot(data = numEvstate_tidy, aes(x = factor(STABR, levels = order2$STABR), y = numberofevent, fill = eventtype)) +
@@ -252,6 +294,8 @@ ggplot(data = numEvstate_tidy, aes(x = factor(STABR, levels = order2$STABR), y =
   scale_y_continuous() +
   coord_flip()
 ```
+
+We also use two stacked bar chart one ordered by the add up number of events hold by libraries of each state and the other ordered by the total number of library in each state. Thus we can show the relationship between number of event and number of library while keep the pattern of different kind of resource and the state's name.
 
 Most of the libraries hold reading event for readers. There are events for children, young adult and others. As we can see from the graph above, state with more number of library tend to have more reading event over state. Among all the events, most states' library tend to have more program for children except New York and Florida.
 
@@ -269,6 +313,26 @@ revstate_tidy<-revstate%>%
 #revstate_tidy
 ```
 
+```{r}
+order5 <- revstate %>% 
+  mutate(numRe=LocalGov+StateGov+FederalGov+OtherCapital)%>%
+  arrange(numRe) %>% 
+  mutate(STABR = factor(STABR))
+```
+
+```{r fig.height=8}
+ggplot(data = revstate_tidy, aes(x = factor(STABR, levels = order5$STABR), y = amountofrevenue, fill = revenuetype)) +
+  geom_bar(stat="identity") +
+  xlab("State") +
+  ylab("Amount of Revenue") +
+  guides(fill=guide_legend(title="Revenue Type")) +
+  ggtitle("Amount of Revenue Received by Different States' Library, 2020") +
+  theme(plot.title = element_text(hjust = 0.5,size=12)) +
+  scale_y_continuous() +
+  coord_flip()
+```
+
+
 ```{r fig.height=8}
 ggplot(data = revstate_tidy, aes(x = factor(STABR, levels = order2$STABR), y = amountofrevenue, fill = revenuetype)) +
   geom_bar(stat="identity") +
@@ -280,6 +344,8 @@ ggplot(data = revstate_tidy, aes(x = factor(STABR, levels = order2$STABR), y = a
   scale_y_continuous() +
   coord_flip()
 ```
+
+We first use a stacked bar chart ordered by the add up number of revenue. Then we draw a stacked bar chart ordered by the total number of library in each state to show the relationship between revenue and number of library while keep the pattern of different kind of resource and the state's name.
 
 As we all know that most of the libraries are free for residents to visit and a large proportion of money are from revenue. There are four kinds of revenue that a library can have, which are revenue from federal government, state government, local government and others. We ordered the stacked bar chart in the order of number of libraries in a state. As we can see from the graph, the relationship between the number of library and total amount of revenue is relatively weak comparing with other characters we analyzed before. This shows that some of the states' library receive more revenue than others. Most of states' library receive more revenue from their local government while there are several state receive more revenue from other way. We can also see that New York, Massachusetts and Hawaii's libraries receive relatively large amount of revenue from the state government which some how reflect the importance put on libraries or other entertainment and culture by the state.
 
@@ -318,7 +384,7 @@ df_library<-df_library%>%
 
 ggplot(df_library, aes(YEAR, POPU_LSA,color=type)) +
   geom_line(aes(group = `STABR`)) +
-  ggtitle("State Population through 2005-2020") +  labs (x = "", y = "population") +
+  ggtitle("State Population through 2006-2020") +  labs (x = "", y = "population") +
   scale_color_manual(values=c("CA"="#e6ab02","TX"="#a6761d","NY"="#e7298a","other"="grey"))+
   theme_grey(16) +
   theme(legend.title = element_blank())
@@ -343,7 +409,7 @@ df_library<-df_library%>%
 
 ggplot(df_library, aes(YEAR, numberoflib,color=type)) +
   geom_line(aes(group = `STABR`)) +
-  ggtitle("Number of Library through 2005-2020") +  
+  ggtitle("Number of Library through 2006-2020") +  
   labs (x = "", y = "number of library") +
   scale_color_manual(values=c("CA"="#e6ab02","NY"="#e7298a","TX"="#a6761d","IL"="#66a61e","OH"="#1b9e77","other"="grey"))+
   theme_grey(16) +
@@ -369,7 +435,7 @@ df_library<-df_library%>%
 
 ggplot(df_library, aes(YEAR, VISITS,color=type)) +
   geom_line(aes(group = `STABR`)) +
-  ggtitle("Visit of Library through 2005-2020") +  
+  ggtitle("Visit of Library through 2006-2020") +  
   labs (x = "", y = "number of visitor") +
   scale_color_manual(values=c("CA"="#e6ab02","IL"="#66a61e" ,"OH"="#1b9e77","NY"="#e7298a","TX"="#a6761d","other"="grey"))+
   theme_grey(16) +
@@ -392,7 +458,7 @@ df_library<-df_library%>%
 
 ggplot(df_library, aes(YEAR, BKVOL,color=type)) +
   geom_line(aes(group = `STABR`)) +
-  ggtitle("Printed Material through 2005-2020") +
+  ggtitle("Printed Material through 2006-2020") +
   labs (x = "", y = "number of printed material") +
   scale_color_manual(values=c("NY"="#e7298a","CA"="#e6ab02","IL"="#66a61e","OH"="#1b9e77","TX"="#a6761d","other"="grey"))+
   theme_grey(16) +
@@ -417,7 +483,7 @@ df_library<-df_library%>%
 
 ggplot(df_library, aes(YEAR, EBOOK,color=`type`)) +
   geom_line(aes(group = `STABR`)) +
-  ggtitle("Ebook Resource through 2005-2020") +  
+  ggtitle("Ebook Resource through 2006-2020") +  
   labs (x = "", y = "number of ebook") +
   scale_color_manual(values=c( "OH"="#1b9e77", "KS"="#d95f02" ,"WI"="#7570b3" ,"NY"="#e7298a","IL"="#66a61e" ,"other"="grey"))+
   theme_grey(16) +

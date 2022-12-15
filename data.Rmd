@@ -108,7 +108,9 @@ museum_coordinates %>%
 
 ### Library Data
 We first visualize the missing data in our data set and discuss the pattern it has. This is an important step for us to under stand our data.
+
 #### Library Data Set
+
 1. Library data of 2020
 In this project, we first analyze the data of Library in US in 2020. According to the document of the data set, all the missing data is filled with '-1'. Thus, we will visualize the distribution of '-1' in this data set.
 
