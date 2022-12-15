@@ -1,5 +1,13 @@
 # Conclusion
+We analyzed museums and libraries in US and found the following facts:
+
 ## Museum
+
+1. The numbers of museums in California, New York, Texas, Pennsylvania and Ohio are TOP5 largest. In each state, the discipline distributions among different states are similar, and history related museums take the largest share in most states.
+
+2. For those museums that reported their incomes, most museums either have no incomes or have incomes in range 25,000 and 4,999,999. Most history related museums have no income, on the contrary, Art museums have a great share of high incomes.
+
+3. The History related museums grow fast from 1950s to 2000s, and the art museum has a rapid growth in 1940s, which can reflect some social changes at different time.
 
 ## Library
 We have several conclusion after our analysis:
@@ -10,5 +18,6 @@ We have several conclusion after our analysis:
 
 3. Additionally, we can see the development and spread of ebook and other electronic resource in the past ten years as many the ebook resource in many states' library increased quickly during the past years.
 
-4. Last but not least, by comparing the library data with museum data, we can see that states with well developed library also tend to have well developed museum. The north east region and California tend to have more library and museum related resources while the north west tend to have less. This is reasonable as library and museum are both important part of cultural development of a country or a region. Also there might be some history reason as some of the states have much longer history and are believed to be well developed region across the country and has higher population.
+## Regional Cultural development
+Last but not least, by comparing the library data with museum data, we can see that states with well developed library also tend to have well developed museum. The north east region and California tend to have more library and museum related resources while the north west tend to have less. This is reasonable as library and museum are both important part of cultural development of a country or a region. Also there might be some history reason as some of the states have much longer history and are believed to be well developed region across the country and has higher population.
 
