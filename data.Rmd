@@ -110,8 +110,6 @@ museum_coordinates %>%
 ### Library Data
 We first visualize the missing data in our library data set and discuss the pattern it has. This is an important step for us to under stand our data.
 
-#### Library Data Set
-
 1. Library data of 2020
 
 In this project, we first analyze the data of Library in US in 2020. According to the document of the data set, all the missing data is filled with '-1'. Thus, we will visualize the distribution of '-1' in this data set.
@@ -142,7 +140,7 @@ plot_missing(listatedatamis,percent=FALSE)
 
 This graph shows the pattern further which is most rows (data of different state) is complete and provide us a relatively good data quality to analyze and visualize the libraries in US.
 
-#### Time series missing data analysis
+2. Time series missing data analysis
 
 Moreover, to discuss the changing pattern of libraries in US, we collect library data in different years. Although we can easily read in all the raw data, band them together and select the variables we are interested in, we believe that to store such a large set of data makes the requirement of space of this project too big and the transforming progress takes a lot of time. As a result, we choose the variable in each years' data and store them in a csv file. As the data update once a year, it will not take too much time to add new data to this file. As for the data format, we keep it same with the original data and all the missing data is filled with '-1'.
 ```{r}

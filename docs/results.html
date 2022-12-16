@@ -149,12 +149,12 @@
 <h2><span class="header-section-number">4.1</span> Museum in US<a href="results.html#museum-in-us" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="discipline-museums-distribution-in-states" class="section level3 hasAnchor" number="4.1.1">
 <h3><span class="header-section-number">4.1.1</span> Discipline Museums Distribution in States<a href="results.html#discipline-museums-distribution-in-states" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>We can find that HSC(Historical Societies and Historic Preservation) and GMU(Uncategorized or General Museums) take great share in each state’s museums, especially HSC. And the proportions of different disciplines in different states remains similar, which means there is no obvious tendency of a state to own one kind of museum more than other kinds.</p>
 </div>
 <div id="relationship-between-income-and-discipline" class="section level3 hasAnchor" number="4.1.2">
 <h3><span class="header-section-number">4.1.2</span> Relationship Between Income and Discipline<a href="results.html#relationship-between-income-and-discipline" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>The 0~9 of incomecd15 present different income ranges: 0, $1 to $9,999, $10,000 to $24,999, $25,000 to $99,999, $100,000 to $499,999, $500,000 to $999,999, $1,000,000 to $4,999,999, $5,000,000 to $9,999,999, $10,000,000 to $49,999,999, $50,000,000 to greater.</p>
 <p>It shows that there are a lot of museums did not provide their income status. In those museums that provided incomes, except ART and CMU, other discipline museums that did not have incomes take biggest share, especially HSC, since most of this kind of museum don’t need tickets.</p>
 <p>But since Art Museums are often charge highly, there are great proportion of Art museums earn income over 50,000,000 in 2015. And there are more CMU (children museum) earn between 25,000 and 4,999,999 than other incomes, which means most CMU need tickets and parents are willing to visit them to educate their kids.</p>
@@ -164,14 +164,14 @@
 <h3><span class="header-section-number">4.1.3</span> Relationship Between Location and Revenue<a href="results.html#relationship-between-location-and-revenue" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The sustainable development of museums can preserve local culture and history. However, it’s possible to face the situation that museums with certain themes are more popular than others, hence the considerable income for local governments. It’s essential to keep the balanced development for all categories instead of being profit-seeking. If the current development of the museum follows the local features, then the geographical location should be a dominant variable in terms of the distribution of the museum.</p>
 <p>First, we can look at the distribution of museum income levels among different states. We can see that there is no significant difference in the distribution in terms of states in each income level, which means that the income level should not have a strong relationship with the development of the local museums. However, we still need further evidence to support our hypothesis.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-20-1.png" width="1056" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-19-1.png" width="1056" /></p>
 <p>To examine the relationship between location and revenue further, we can use principal component analysis on <code>INCOME15</code>, <code>REVENUE15</code> (profit-related variables), <code>LONGITUDE</code>,<code>LATITUDE</code> (geographical variables).</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>We can see that the vectors standing for the revenue and income are almost overlapping together, which means the data matched the collecting process as mentioned in the official guide: the income is calculated by using the revenue minus the operation cost in that year. Also, we can see that the distribution of museums follows the vectors of latitude and longitude closely, and the museum locations are not correlated with income and revenue since they are almost perpendicular to each other. Hence, the current development of museums is not profit-seeking since there is no relationship between location and revenue based on the above results.</p>
 </div>
 <div id="new-museums-trend" class="section level3 hasAnchor" number="4.1.4">
 <h3><span class="header-section-number">4.1.4</span> New Museums Trend<a href="results.html#new-museums-trend" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>The numbers of most kinds of museums increase slowly since 1920s to 2000s. Since the data is collected in 2018, the new museum numbers cannot present the total 2010s. Before 2010s, there is an obvious increase of HSC from 1950s to 2000s, which indicates that the government established lots of Historical Societies/ Historic Preservation after 1950s.</p>
 <p>Besides that, the numbers of GMU and HST also increased a lot. The rapid growth of history related museum reflects that we care about history more and more in recent days.
 Also, the number of art museum in 1940s has an obvious increase, which means the fashion of enjoying art was prevailing at that time.</p>
@@ -183,20 +183,20 @@ Also, the number of art museum in 1940s has an obvious increase, which means the
 <h3><span class="header-section-number">4.2.1</span> Analysis of Library 2020<a href="results.html#analysis-of-library-2020" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="population-and-visitors" class="section level4 hasAnchor" number="4.2.1.1">
 <h4><span class="header-section-number">4.2.1.1</span> Population and visitors<a href="results.html#population-and-visitors" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>We first analyze the population, number of people visit local library and number of register member of library in each state. The cleveland dot plot is ordered by the population of each state. As we can see from the graph, there is a overall trend of the state has large population tend to have more visitor and register to libraries in the state. In another word, there is a positive correlation between the population and the number of visitors. However, this is not graranteed as there are some state with large population having relatively small number of visitors like Texas and Florida.</p>
 </div>
 <div id="number-of-library" class="section level4 hasAnchor" number="4.2.1.2">
 <h4><span class="header-section-number">4.2.1.2</span> Number of library<a href="results.html#number-of-library" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>Then, we would like to analyze the number of library in each state. There are basically three kinds of libraries: center library, branch library and book mobile. We use a stacked bar chart to show the number of library in each state and the bars are ordered by the population of each state. As we can see, there is also a positive correlation between the population of each state and the number of library. However, this is not graranteed as there are some state with large population having relatively small number of library like Florida and Arizona.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p>In the following part, we are interested in other aspect of different state’s libraries which is more closely related to the number of library instead of the population. To better analyze the patterns of these variables, we make a stacked bar chart of the number of library in each state ordered by the total number of library. As we can see from the graph above, the proportion of different kind of libraries are different among different states. For example, California has a large proportion of branch libraries while New York has more proportion of main libraries. This shows that the structure of library systems of different states are different.</p>
 </div>
 <div id="collections-of-libraries" class="section level4 hasAnchor" number="4.2.1.3">
 <h4><span class="header-section-number">4.2.1.3</span> Collections of Libraries<a href="results.html#collections-of-libraries" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <p>We first use a stacked bar chart ordered by the add up number of resource of each state. Then we draw a stacked bar chart ordered by the total number of library in each state to show the relationship between number of resource and number of library while keep the pattern of different kind of resource and the state’s name.</p>
 <p>There are several kinds of resource in each library: printed material, audio resource in physical format or digital format, video resource in physical format or digital format, ebook, state digital resource and other electronic resource. As the last two kinds are relatively small, we combine them together and set as a new group ‘other digital resource’.</p>
 <p>The stacked bar chart is sorted by the number of library in each state. As we can see, there is a positive correlation between the number of library and the total resource owned by local library from the stacked bar chart sorted by the number of library in each state. However, there are also many outliers like Ohio and Kansas which own much more resource than expected.</p>
@@ -204,22 +204,22 @@ Also, the number of art museum in 1940s has an obvious increase, which means the
 </div>
 <div id="events-hold-by-libraries" class="section level4 hasAnchor" number="4.2.1.4">
 <h4><span class="header-section-number">4.2.1.4</span> Events Hold by Libraries<a href="results.html#events-hold-by-libraries" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p>We also use two stacked bar chart one ordered by the add up number of events hold by libraries of each state and the other ordered by the total number of library in each state. Thus we can show the relationship between number of event and number of library while keep the pattern of different kind of resource and the state’s name.</p>
 <p>Most of the libraries hold reading event for readers. There are events for children, young adult and others. As we can see from the graph above, state with more number of library tend to have more reading event over state. Among all the events, most states’ library tend to have more program for children except New York and Florida.</p>
 </div>
 <div id="revenue" class="section level4 hasAnchor" number="4.2.1.5">
 <h4><span class="header-section-number">4.2.1.5</span> Revenue<a href="results.html#revenue" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 <p>We first use a stacked bar chart ordered by the add up number of revenue. Then we draw a stacked bar chart ordered by the total number of library in each state to show the relationship between revenue and number of library while keep the pattern of different kind of resource and the state’s name.</p>
 <p>As we all know that most of the libraries are free for residents to visit and a large proportion of money are from revenue. There are four kinds of revenue that a library can have, which are revenue from federal government, state government, local government and others.</p>
 <p>As we can see from the graph ordered by number of library, the relationship between the number of library and total amount of revenue is relatively weak comparing with other characters we analyzed before. This shows that some of the states’ library receive more revenue than others. Most of states’ library receive more revenue from their local government while there are several state receive more revenue from other way. We can also see that New York, Massachusetts and Hawaii’s libraries receive relatively large amount of revenue from the state government which some how reflect the importance put on libraries or other entertainment and culture by the state.</p>
 </div>
 <div id="overall-analysis" class="section level4 hasAnchor" number="4.2.1.6">
 <h4><span class="header-section-number">4.2.1.6</span> Overall Analysis<a href="results.html#overall-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 <p>We put all the variables we discussed together including the population, number of visitors, number of register, printed material resource, ebook resource, electronic resource, programs and revenue. We can see from the parallel coordinate graph that the relationship between each variable are basically positive correlated for most of the states and each variable has outliers.</p>
 <p>California is outlier for all the variables regarding the number of people including the number of visitor, member of library. New York has biggest volume of books while Kansas and Ohio has really high number of ebook and Pennsylvania has highest number of other electronic resource. California and New York receive highest amount of revenue. As we can see from above, some of the state dominate more than one variable like California and New York while more than half of states have relative low value in all of the variables which shows a inequality development of library in different state.</p>
 <p>As we can see from the spatial graph, the state with higher number of library are clustered on the east side of the country especially the north east region while the state in the west east have relatively low number of library.</p>
@@ -230,27 +230,27 @@ Also, the number of art museum in 1940s has an obvious increase, which means the
 <p>We also interested in the change of data during past 15 years as the world changed quickly with the development of internet and there all kinds of entertainment in people’s life. Thus, we make a series of graph to show the change in number of library, number of people visit library annually, and the number of books and ebooks in library. As our data is annual data, we didn’t transform it into ‘date’ data type but keep it as integer.</p>
 <div id="population-change-in-past-15-years" class="section level4 hasAnchor" number="4.2.2.1">
 <h4><span class="header-section-number">4.2.2.1</span> Population change in past 15 years<a href="results.html#population-change-in-past-15-years" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p>First, we show that the population of each state has a slow but stable increasing trend during the past 15 years. Although the increment is not so big except several big state. The top five population dense states are California, Texas, Florida, New York and Pennsylvania. We didn’t show Florida and Pennsylvania in the graph with particular corresponding color as these two states don’t rank top in the other statistic value regarding library.</p>
 </div>
 <div id="number-of-library-change-in-past-15-years" class="section level4 hasAnchor" number="4.2.2.2">
 <h4><span class="header-section-number">4.2.2.2</span> Number of Library change in past 15 years<a href="results.html#number-of-library-change-in-past-15-years" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p>Then, we compare the number of library in each state and we can see that most of states’ number of library didn’t change during the past 15 years.</p>
 </div>
 <div id="number-of-people-visit-library" class="section level4 hasAnchor" number="4.2.2.3">
 <h4><span class="header-section-number">4.2.2.3</span> Number of people visit library<a href="results.html#number-of-people-visit-library" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <p>After we known that the population didn’t decrease but indeed increased in most of states and the number of library didn’t change, we can see that the proportion of population decreased during the past 15 years. In other word, less people visit library during the past years which may partly due to people can search information more and more conveniently on cellphone or computer and have more ways to relax during their spare time. It is also very likely that people live better life now and they can afford buying their own copy of book instead of borrow one. However, comparing with the decrease in 2020, the decrease trend is much more subtle which means that there are still lots of people go to library before the pandemic. The covid-19 has more impact on whether people would like to or whether they can visit a library.</p>
 </div>
 <div id="printed-material-change-during-past-15-years" class="section level4 hasAnchor" number="4.2.2.4">
 <h4><span class="header-section-number">4.2.2.4</span> Printed material change during past 15 years<a href="results.html#printed-material-change-during-past-15-years" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <p>Then, we can see that the collection of books in some state’s library has a decreasing trend during the past 15 years which is especially clear in some of the state has large volume of books in the past. This is quite surprising outcome as it seems unimaginable that people in the library throw away books.</p>
 </div>
 <div id="number-of-ebook-change-during-past-15-years" class="section level4 hasAnchor" number="4.2.2.5">
 <h4><span class="header-section-number">4.2.2.5</span> Number of ebook change during past 15 years<a href="results.html#number-of-ebook-change-during-past-15-years" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <p>On the contrary, we can see a quick increase in the collection of books in most of state’s library during the past 10 years. Ebook came out around 2010 and became more and more popular during the past years. There are several state ended with a really large number of collection of ebook which shows they put a lot of importance on this kind of resource provided to people. We can also specify that the state with relatively large collection of ebook are also those with large collection of printed materials which show that a state kind of support the development of library.</p>
 </div>
 </div>
@@ -259,12 +259,12 @@ Also, the number of art museum in 1940s has an obvious increase, which means the
 <h2><span class="header-section-number">4.3</span> Museum and Library in US<a href="results.html#museum-and-library-in-us" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="museum-map" class="section level3 hasAnchor" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Museum map<a href="results.html#museum-map" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 <p>It shows that California, Texas and New York states have obviously more museums than other states, the numbers are over 1600. There are more museums in the east than west, and more in the outside states than states in the middle. Especially, in Delaware, Alaska, Utah, and Nevada have under 160 museums.</p>
 </div>
 <div id="library-map" class="section level3 hasAnchor" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Library map<a href="results.html#library-map" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 <p>As we can see from the spatial graph, the state with higher number of library are clustered on the east side of the country especially the north east region while the state in the west east have relatively low number of libraries.</p>
 </div>
 <div id="relationship-between-museum-and-library-distributions" class="section level3 hasAnchor" number="4.3.3">
