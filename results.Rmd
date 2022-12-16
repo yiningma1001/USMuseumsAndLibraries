@@ -64,7 +64,7 @@ proportion<-museum_income %>%
   mutate(proportion = 100*numbers/sum(numbers))%>%
   ungroup
 
-ggplot(proportion, aes(x = GSTATE, y = INCOMECD15, fill=proportion)) +
+ggplot(proportion, aes(x = GSTATE, y = as.character(INCOMECD15), fill=proportion)) +
   geom_tile(aes(fill = proportion), color = "white") +
   coord_fixed()+
   ggtitle("Proportion of Different Income Ranges in Different States")+
@@ -257,7 +257,9 @@ We first use a stacked bar chart ordered by the add up number of resource of eac
 
 There are several kinds of resource in each library: printed material, audio resource in physical format or digital format, video resource in physical format or digital format, ebook, state digital resource and other electronic resource. As the last two kinds are relatively small, we combine them together and set as a new group 'other digital resource'. 
 
-The stacked bar chart is sorted by the number of library in each state. As we can see, there is a positive correlation between the number of library and the total resource owned by local library. However, there are also many outliers like Ohio and Kansas which own much more resource than expected. Further more, we can see from the graph that different state's library's resource pattern are different. Some of the state has more proportion of electronic resource while some of the libraries have more proportion of printed material.
+The stacked bar chart is sorted by the number of library in each state. As we can see, there is a positive correlation between the number of library and the total resource owned by local library from the stacked bar chart sorted by the number of library in each state. However, there are also many outliers like Ohio and Kansas which own much more resource than expected.
+
+Further more, we can see from the graph that different state's library's resource pattern are different. Some of the state has more proportion of electronic resource while some of the libraries have more proportion of printed material.
 
 
 #### Events Hold by Libraries
@@ -356,7 +358,9 @@ ggplot(data = revstate_tidy, aes(x = factor(STABR, levels = order2$STABR), y = a
 
 We first use a stacked bar chart ordered by the add up number of revenue. Then we draw a stacked bar chart ordered by the total number of library in each state to show the relationship between revenue and number of library while keep the pattern of different kind of resource and the state's name.
 
-As we all know that most of the libraries are free for residents to visit and a large proportion of money are from revenue. There are four kinds of revenue that a library can have, which are revenue from federal government, state government, local government and others. We ordered the stacked bar chart in the order of number of libraries in a state. As we can see from the graph, the relationship between the number of library and total amount of revenue is relatively weak comparing with other characters we analyzed before. This shows that some of the states' library receive more revenue than others. Most of states' library receive more revenue from their local government while there are several state receive more revenue from other way. We can also see that New York, Massachusetts and Hawaii's libraries receive relatively large amount of revenue from the state government which some how reflect the importance put on libraries or other entertainment and culture by the state.
+As we all know that most of the libraries are free for residents to visit and a large proportion of money are from revenue. There are four kinds of revenue that a library can have, which are revenue from federal government, state government, local government and others.
+
+As we can see from the graph ordered by number of library, the relationship between the number of library and total amount of revenue is relatively weak comparing with other characters we analyzed before. This shows that some of the states' library receive more revenue than others. Most of states' library receive more revenue from their local government while there are several state receive more revenue from other way. We can also see that New York, Massachusetts and Hawaii's libraries receive relatively large amount of revenue from the state government which some how reflect the importance put on libraries or other entertainment and culture by the state.
 
 #### Overall Analysis
 ```{r}
@@ -376,7 +380,7 @@ California is outlier for all the variables regarding the number of people inclu
 As we can see from the spatial graph, the state with higher number of library are clustered on the east side of the country especially the north east region while the state in the west east have relatively low number of library.
 
 ### Time Series Analysis
-We also interested in the change of data during past 15 years as the world changed quickly with the development of internet and all kinds of entertainment in people's life. Thus, we make a series of graph to show the change in number of library, number of people visit library annually, and the number of books and ebooks in library. As our data is annual data, we didn't transform it into 'date' data type but keep it as integer.
+We also interested in the change of data during past 15 years as the world changed quickly with the development of internet and there all kinds of entertainment in people's life. Thus, we make a series of graph to show the change in number of library, number of people visit library annually, and the number of books and ebooks in library. As our data is annual data, we didn't transform it into 'date' data type but keep it as integer.
 
 #### Population change in past 15 years
 ```{r}
@@ -451,6 +455,7 @@ ggplot(df_library, aes(YEAR, VISITS,color=type)) +
   theme(legend.title = element_blank())
 
 ```
+
 After we known that the population didn't decrease but indeed increased in most of states and the number of library didn't change, we can see that the proportion of population decreased during the past 15 years. In other word, less people visit library during the past years which may partly due to people can search information more and more conveniently on cellphone or computer and have more ways to relax during their spare time. It is also very likely that people live better life now and they can afford buying their own copy of book instead of borrow one. However, comparing with the decrease in 2020, the decrease trend is much more subtle which means that there are still lots of people go to library before the pandemic. The covid-19 has more impact on whether people would like to or whether they can visit a library.
 
 #### Printed material change during past 15 years
@@ -475,7 +480,7 @@ ggplot(df_library, aes(YEAR, BKVOL,color=type)) +
 ```
 
 
-Then, we can see that the collection of books in some state's library has a decreasing trend during the past 15 years which is especially clear in some of the state has large volume of books in the past. This is quite surprising outcome as it seems unlikely that people in the library throw away books.
+Then, we can see that the collection of books in some state's library has a decreasing trend during the past 15 years which is especially clear in some of the state has large volume of books in the past. This is quite surprising outcome as it seems unimaginable that people in the library throw away books.
 
 #### Number of ebook change during past 15 years
 

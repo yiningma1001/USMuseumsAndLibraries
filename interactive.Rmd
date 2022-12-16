@@ -1,5 +1,5 @@
 # Interactive component
-This is a interactive webpage related to our project. You can choose to guess the states rank top five on number of library or museum in the state and click the bar to get the answer. By clicking on the button, you can choose to switch from library to museum or vice versa. Hope you enjoy this!
+This is a interactive webpage related to our project. You can choose to guess the states rank top five on number of library or museum and click the bar to get the answer. By clicking on the button, you can choose to switch from library to museum or vice versa. Hope you enjoy this!
 <script src="https://d3js.org/d3.v7.js"></script>
 
 <h1>Check state ranks of owing libraries or museums </h1>

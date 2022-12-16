@@ -149,16 +149,16 @@
 <h2><span class="header-section-number">3.1</span> Sources<a href="data.html#sources" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="museum-data-source" class="section level3 hasAnchor" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Museum Data Source<a href="data.html#museum-data-source" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The Museum data is from the official website of the Institute of Museum and Library Services(IMLS), and we use the latest version that collected in 2018. There are three csv files that contain different type of museums. The second file just contains GMU museums, the third file just contains HSC museums.</p>
-<p>The three files contain 7431, 7961, 14786 museums, and each file has 58 variables, including some basic information, like the id, location, contact, ruledate information, and the income and revenue information.</p>
-<p>And we choose to mainly analyse the state, discipline, income and the established dates, therefore, we select the relevant columns to conduct our analysis. The discipline contains 9 values, reflecting 9 kinds of museums; we choose IncomeCD15 to present museum income, which 9 ranges of income from 0 to 50,000,000 and greater; rule_date the registered nonprofit organization was recognized as having obtained their formal tax-exempt status by the IRS, we use this column to present the established date.</p>
+<p>The Museum data is from the official website of the Institute of Museum and Library Services(IMLS), and we use the latest version which was collected in 2018. There are three csv files that contain different type of museums. The second file just contains GMU museums, the third file just contains HSC museums.</p>
+<p>The three files contain 7431, 7961, 14786 museums respectively, and each file has 58 variables, including some basic information, like the id, location, contact, ruledate information, and the income and revenue information.</p>
+<p>And we choose to mainly analyse the state, discipline, income and the established dates, therefore, we select the relevant columns to conduct our analysis. The discipline contains 9 values, reflecting 9 kinds of museums; we choose IncomeCD15 to present museum income, which 9 ranges of income from 0 to 50,000,000 and greater; rule_date, the registered nonprofit organization was recognized as having obtained their formal tax-exempt status by the IRS, we use this column to present the established date.</p>
 </div>
 <div id="library-data-source" class="section level3 hasAnchor" number="3.1.2">
 <h3><span class="header-section-number">3.1.2</span> Library Data Source<a href="data.html#library-data-source" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The library data set is also from <a href="https://www.imls.gov/" class="uri">https://www.imls.gov/</a> which is the website of the Institute of Museum and Library Service. This institute provide several data set regarding museum and library across the nation. We use the data set of The Public Libraries Survey (PLS) which supplied annually by public libraries across the country on when, where, and how library services are changing to meet the needs of the public.</p>
+<p>The library data set is also from <a href="https://www.imls.gov/" class="uri">https://www.imls.gov/</a> which is the website of the Institute of Museum and Library Service. This institute provides several data set regarding museum and library across the nation. We use the data set of The Public Libraries Survey (PLS) which supplied annually by public libraries across the country on when, where, and how library services are changing to meet the needs of the public.</p>
 <p>The data was collected by the institute. The survey is administered by Data Coordinators and the requested data was collected from local public libraries. There is a web-based reporting system State Data Coordinators used report data to the institute.</p>
 <p>The survey was conducted annually since 1988 and the website provides data files since 1992. During past years, the content on the survey changed 3 times and the format of the data sets are slightly differences.</p>
-<p>As for the data file, the data files are available on the web site and is a public-used data set which means some of the data was removed aimed to protect the confidentiality of individually identifiable survey respondents. Our project use this public-used data set which was encoded and pre-processed and provides a documentation file to help the user correctly understand the data set and gives detailed information about the data set.</p>
+<p>As for the data file, the data files are available on the web site and is a public-used data set which means some of the data was removed aimed to protect the confidentiality of individually identifiable survey respondents. Our project use this public-used data set which was encoded and pre-processed and provides a documentation file to help the user correctly understand the data set and give detailed information about the data set.</p>
 <p>The data set provides statistics on the status of public libraries in the United States collected from approximately 9,000 public libraries with approximately 17,000 individual public library outlets in the 50 states, the District of Columbia, and outlying territories. The data set contains information about library visits, circulation, size of collections, public service hours, staffing, electronic resources, operating revenues and expenditures and number of service outlets. We basically use the state wide data which contains 55 rows and more than 100 variables.</p>
 </div>
 </div>
@@ -178,35 +178,35 @@
 <h2><span class="header-section-number">3.3</span> Missing value analysis<a href="data.html#missing-value-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="museum-data" class="section level3 hasAnchor" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Museum Data<a href="data.html#museum-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>There is no missing data in discipline and state, but are 8677(28.8%) empty value in incomecd, and 8682(28.8%) empty value in rule date.
-Most missing cases are missing rule date and incomecd together, which means missing these two variables are correlated.
-If MID is missing, we think it is not a valid museum record, and will delete this record.</p>
+<p>There is no missing data in discipline and state, but there are 8677(28.8%) empty value in incomecd and 8682(28.8%) empty value in rule date.</p>
+<p>Most missing cases are missing rule date and incomecd together, which means missing these two variables are correlated.
+If MID is missing, we treat it as a invalid museum record delete the record.</p>
 <pre><code>##        MID DISCIPLINE    ADSTATE INCOMECD15 RULEDATE15 
 ##          3          0          0       8677       8682</code></pre>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>We can see that after removing missing data, the rest of data is still representative since we can restore the shape of the map of the USA by plotting the rest of the data according to each pair of the location variable. This means that data collection covers each state and the amount of missing data is reasonable because the rest of data keeps the key geographic and discipline information. Hence, it’s valid to explore the distribution of disciplines and locations in the following sections by using the rest of data.</p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>We can see that after removing missing data, the rest of data is still representative since we can restore the shape of the map of the USA by plotting the rest of the data according to each pair of the location variable. This means that data collection covers each state and the amount of missing data is reasonable because the rest of data keeps the key geographic and discipline information. Hence, it’s valid to explore the distribution of disciplines and locations in the following sections by using the rest of data.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="library-data" class="section level3 hasAnchor" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Library Data<a href="data.html#library-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We first visualize the missing data in our data set and discuss the pattern it has. This is an important step for us to under stand our data.</p>
+<p>We first visualize the missing data in our library data set and discuss the pattern it has. This is an important step for us to under stand our data.</p>
 <div id="library-data-set" class="section level4 hasAnchor" number="3.3.2.1">
 <h4><span class="header-section-number">3.3.2.1</span> Library Data Set<a href="data.html#library-data-set" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ol style="list-style-type: decimal">
-<li>Library data of 2020
-In this project, we first analyze the data of Library in US in 2020. According to the document of the data set, all the missing data is filled with ‘-1’. Thus, we will visualize the distribution of ‘-1’ in this data set.</li>
+<li>Library data of 2020</li>
 </ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>As we can see from the graph, the only row has missing data is the state with code ‘VI’ which is Virgin Islands. All other data is completed. As this state is an outlying area of the United States and missing data are primarily some statistic data about the revenue and resource data of the library, we believe it is reasonable to keep the data as ‘-1’ in these rows which have little effect on our visualization.</p>
+<p>In this project, we first analyze the data of Library in US in 2020. According to the document of the data set, all the missing data is filled with ‘-1’. Thus, we will visualize the distribution of ‘-1’ in this data set.</p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>As we can see from the graph, the only row has missing data is the state with code ‘VI’ which is Virgin Islands. All other data is completed. As this state is an outlying area of the United States and missing data are primarily some statistic data about the revenue and resource data of the library, we believe it is reasonable to keep the data as ‘-1’ in these rows which have little effect on our visualization.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>This graph shows the pattern further which is most rows (data of different state) is complete and provide us a relatively good data quality to analyze and visualize the libraries in US.</p>
 </div>
 <div id="time-series-missing-data-analysis" class="section level4 hasAnchor" number="3.3.2.2">
 <h4><span class="header-section-number">3.3.2.2</span> Time series missing data analysis<a href="data.html#time-series-missing-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Moreover, to discuss the changing pattern of libraries in US, we collect library data in different years. Although we can easily read in all the raw data, band them together and select the variables we are interested in, we believe that to store such a large set of data makes the requirement of space of this project too big and the transforming progress takes a lot of time. As a result, we choose the variable in each years’ data and store them in a csv file. As the data update once a year, it will not take too much time to add new data to this file. As for the data format, we keep it same with the original data and all the missing data is filled with ‘-1’.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>As we can see from the graph, there are three states having missing data through the years which are GU(Guam), MP(Northern Mariana Islands) and VI(Virgin Islands). All of these states are outlying area of the United States. Thus, we keep these data with its original form.</p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>As we can see from the graph, there are three states having missing data through the years which are GU(Guam), MP(Northern Mariana Islands) and VI(Virgin Islands). All of these states are outlying area of the United States. Thus, we keep these data with its original form.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>As we can see in this chart, among all the rows having missing data, some of them missing quite a lot of data while others only miss one or two data. As we result, we would like to further see the missing data. We select all the rows of the three states and data is as below:</p>
 <pre><code>##    STABR YEAR POPU_LSA CENTLIB BRANLIB BKMOB  BKVOL EBOOK VISITS
 ## 1     GU 2020   168678       1       5     0 286930     0  35115
